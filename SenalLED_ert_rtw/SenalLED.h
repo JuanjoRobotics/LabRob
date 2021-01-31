@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'SenalLED'.
  *
- * Model version                  : 7.13
+ * Model version                  : 7.14
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Sat Jan 30 17:12:18 2021
+ * C/C++ source code generated on : Sun Jan 31 12:32:48 2021
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -87,6 +87,7 @@ typedef struct {
   real_T PulseGenerator;               /* '<S1>/Pulse Generator' */
   uint16_T In1;                        /* '<S2>/In1' */
   uint16_T SerialReceive_o1;           /* '<Root>/Serial Receive' */
+  uint8_T IntegertoBitConverter1[4];   /* '<S1>/Integer to Bit Converter1' */
   uint8_T SerialReceive_o2;            /* '<Root>/Serial Receive' */
   boolean_T LogicalOperator2;          /* '<S1>/Logical Operator2' */
   boolean_T LogicalOperator1;          /* '<S1>/Logical Operator1' */
@@ -110,6 +111,10 @@ typedef struct {
   struct {
     void *AQHandles;
   } TAQSigLogging_InsertedFor_Led_g;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Integ;   /* synthesized block */
 
   struct {
     void *AQHandles;

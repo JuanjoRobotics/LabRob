@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'SenalLED'.
  *
- * Model version                  : 7.13
+ * Model version                  : 7.14
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Sat Jan 30 17:12:18 2021
+ * C/C++ source code generated on : Sun Jan 31 12:32:48 2021
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -68,6 +68,7 @@ static void rate_scheduler(void)
 void SenalLED_step(void)
 {
   uint16_T u;
+  uint8_T LogicalOperator2_tmp;
   uint8_T rtb_IntegertoBitConverter_idx_1;
   uint8_T rtb_IntegertoBitConverter_idx_2;
   boolean_T rtb_LogicalOperator4;
@@ -132,12 +133,17 @@ void SenalLED_step(void)
     rtb_LogicalOperator4 = ((SenalLED_B.PulseGenerator != 0.0) || ((uint8_T)
       ((int16_T)u & 1) == 0));
 
-    /* Logic: '<S1>/Logical Operator2' incorporates:
+    /* S-Function (scominttobit): '<S1>/Integer to Bit Converter' incorporates:
      *  DataStoreRead: '<S1>/Data Store Read'
+     *  S-Function (scominttobit): '<S1>/Integer to Bit Converter1'
+     */
+    LogicalOperator2_tmp = (uint8_T)((int16_T)SenalLED_DW.senal & 1);
+
+    /* Logic: '<S1>/Logical Operator2' incorporates:
      *  S-Function (scominttobit): '<S1>/Integer to Bit Converter'
      */
-    SenalLED_B.LogicalOperator2 = (rtb_LogicalOperator4 && ((uint8_T)((int16_T)
-      SenalLED_DW.senal & 1) != 0));
+    SenalLED_B.LogicalOperator2 = (rtb_LogicalOperator4 && (LogicalOperator2_tmp
+      != 0));
 
     /* Logic: '<S1>/Logical Operator1' */
     SenalLED_B.LogicalOperator1 = (rtb_LogicalOperator4 &&
@@ -149,6 +155,18 @@ void SenalLED_step(void)
 
     /* MATLABSystem: '<S1>/BLUE' */
     writeDigitalPin(49, (uint8_T)SenalLED_B.LogicalOperator2);
+
+    /* S-Function (scominttobit): '<S1>/Integer to Bit Converter1' incorporates:
+     *  DataStoreRead: '<S1>/Data Store Read'
+     */
+    /* Integer to Bit Conversion */
+    SenalLED_B.IntegertoBitConverter1[3L] = LogicalOperator2_tmp;
+    u = SenalLED_DW.senal >> 1;
+    SenalLED_B.IntegertoBitConverter1[2L] = (uint8_T)((int16_T)u & 1);
+    u >>= 1;
+    SenalLED_B.IntegertoBitConverter1[1L] = (uint8_T)((int16_T)u & 1);
+    u >>= 1;
+    SenalLED_B.IntegertoBitConverter1[0L] = (uint8_T)((int16_T)u & 1);
 
     /* MATLABSystem: '<S1>/GREEN' */
     writeDigitalPin(53, (uint8_T)SenalLED_B.LogicalOperator);
@@ -272,10 +290,10 @@ void SenalLED_initialize(void)
   SenalLED_M->Timing.stepSize0 = 0.0033333333333333335;
 
   /* External mode info */
-  SenalLED_M->Sizes.checksums[0] = (4181036011U);
-  SenalLED_M->Sizes.checksums[1] = (2066633638U);
-  SenalLED_M->Sizes.checksums[2] = (1458157071U);
-  SenalLED_M->Sizes.checksums[3] = (3185436949U);
+  SenalLED_M->Sizes.checksums[0] = (3392555801U);
+  SenalLED_M->Sizes.checksums[1] = (859116809U);
+  SenalLED_M->Sizes.checksums[2] = (189824965U);
+  SenalLED_M->Sizes.checksums[3] = (1408456651U);
 
   {
     static const sysRanDType rtAlwaysEnabled = SUBSYS_RAN_BC_ENABLE;

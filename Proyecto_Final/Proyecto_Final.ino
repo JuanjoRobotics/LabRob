@@ -32,7 +32,7 @@ void loop() {
         color=color+1;
         i=i+1;
         
-        if (i>7)
+        if (i>15)
         {
           color=0x00;
           i=0;

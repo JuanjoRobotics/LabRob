@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'SenalLED'.
  *
- * Model version                  : 7.13
+ * Model version                  : 7.14
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Sat Jan 30 17:12:18 2021
+ * C/C++ source code generated on : Sun Jan 31 12:32:48 2021
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR

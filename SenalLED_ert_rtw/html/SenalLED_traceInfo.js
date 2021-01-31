@@ -43,10 +43,14 @@ function RTW_rtwnameSIDMap() {
 	this.sidHashMap["SenalLED:65"] = {rtwname: "<S1>/Data Store Read"};
 	this.rtwnameHashMap["<S1>/Demux"] = {sid: "SenalLED:49"};
 	this.sidHashMap["SenalLED:49"] = {rtwname: "<S1>/Demux"};
+	this.rtwnameHashMap["<S1>/Display"] = {sid: "SenalLED:103"};
+	this.sidHashMap["SenalLED:103"] = {rtwname: "<S1>/Display"};
 	this.rtwnameHashMap["<S1>/GREEN"] = {sid: "SenalLED:2"};
 	this.sidHashMap["SenalLED:2"] = {rtwname: "<S1>/GREEN"};
 	this.rtwnameHashMap["<S1>/Integer to Bit Converter"] = {sid: "SenalLED:48"};
 	this.sidHashMap["SenalLED:48"] = {rtwname: "<S1>/Integer to Bit Converter"};
+	this.rtwnameHashMap["<S1>/Integer to Bit Converter1"] = {sid: "SenalLED:102"};
+	this.sidHashMap["SenalLED:102"] = {rtwname: "<S1>/Integer to Bit Converter1"};
 	this.rtwnameHashMap["<S1>/LED AZUL"] = {sid: "SenalLED:71"};
 	this.sidHashMap["SenalLED:71"] = {rtwname: "<S1>/LED AZUL"};
 	this.rtwnameHashMap["<S1>/LED ROJO"] = {sid: "SenalLED:69"};
