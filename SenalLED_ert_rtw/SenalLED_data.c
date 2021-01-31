@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'SenalLED'.
  *
- * Model version                  : 7.12
+ * Model version                  : 7.13
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Wed Jan 20 12:39:48 2021
+ * C/C++ source code generated on : Sat Jan 30 17:12:18 2021
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -70,12 +70,12 @@ P_SenalLED_T SenalLED_P = {
   /* Computed Parameter: Out1_Y0
    * Referenced by: '<S2>/Out1'
    */
-  0,
+  0U,
 
   /* Computed Parameter: DataStoreMemory_InitialValue
    * Referenced by: '<Root>/Data Store Memory'
    */
-  0
+  0U
 };
 
 /*

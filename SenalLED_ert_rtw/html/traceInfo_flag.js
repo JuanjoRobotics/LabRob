@@ -9,7 +9,7 @@ function TraceInfoFlag() {
     this.traceFlag["SenalLED.c:106c38"]=1;
     this.traceFlag["SenalLED.c:106c74"]=1;
     this.traceFlag["SenalLED.c:110c35"]=1;
-    this.traceFlag["SenalLED.c:122c37"]=1;
+    this.traceFlag["SenalLED.c:122c27"]=1;
     this.traceFlag["SenalLED.c:123c60"]=1;
     this.traceFlag["SenalLED.c:124c7"]=1;
     this.traceFlag["SenalLED.c:125c60"]=1;
@@ -19,8 +19,8 @@ function TraceInfoFlag() {
     this.traceFlag["SenalLED.c:133c19"]=1;
     this.traceFlag["SenalLED.c:133c24"]=1;
     this.traceFlag["SenalLED.c:139c57"]=1;
-    this.traceFlag["SenalLED.c:140c26"]=1;
-    this.traceFlag["SenalLED.c:140c31"]=1;
+    this.traceFlag["SenalLED.c:140c25"]=1;
+    this.traceFlag["SenalLED.c:140c30"]=1;
     this.traceFlag["SenalLED.c:143c57"]=1;
     this.traceFlag["SenalLED.c:144c40"]=1;
     this.traceFlag["SenalLED.c:147c56"]=1;

@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'SenalLED'.
  *
- * Model version                  : 7.12
+ * Model version                  : 7.13
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Wed Jan 20 12:39:48 2021
+ * C/C++ source code generated on : Sat Jan 30 17:12:18 2021
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -85,8 +85,8 @@
 /* Block signals (default storage) */
 typedef struct {
   real_T PulseGenerator;               /* '<S1>/Pulse Generator' */
-  int16_T In1;                         /* '<S2>/In1' */
-  int16_T SerialReceive_o1;            /* '<Root>/Serial Receive' */
+  uint16_T In1;                        /* '<S2>/In1' */
+  uint16_T SerialReceive_o1;           /* '<Root>/Serial Receive' */
   uint8_T SerialReceive_o2;            /* '<Root>/Serial Receive' */
   boolean_T LogicalOperator2;          /* '<S1>/Logical Operator2' */
   boolean_T LogicalOperator1;          /* '<S1>/Logical Operator1' */
@@ -140,7 +140,7 @@ typedef struct {
   } TAQSigLogging_InsertedFor_Subsy;   /* synthesized block */
 
   int32_T clockTickCounter;            /* '<S1>/Pulse Generator' */
-  int16_T senal;                       /* '<Root>/Data Store Memory' */
+  uint16_T senal;                      /* '<Root>/Data Store Memory' */
   int8_T Subsystem_SubsysRanBC;        /* '<Root>/Subsystem' */
 } DW_SenalLED_T;
 
@@ -173,10 +173,10 @@ struct P_SenalLED_T_ {
   real_T SimulationPace_P4;            /* Expression: SampleTime
                                         * Referenced by: '<S1>/Simulation Pace'
                                         */
-  int16_T Out1_Y0;                     /* Computed Parameter: Out1_Y0
+  uint16_T Out1_Y0;                    /* Computed Parameter: Out1_Y0
                                         * Referenced by: '<S2>/Out1'
                                         */
-  int16_T DataStoreMemory_InitialValue;
+  uint16_T DataStoreMemory_InitialValue;
                              /* Computed Parameter: DataStoreMemory_InitialValue
                               * Referenced by: '<Root>/Data Store Memory'
                               */
