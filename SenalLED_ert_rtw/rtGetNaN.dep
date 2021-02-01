@@ -1,0 +1,11 @@
+rtGetNaN.o: \
+ C:/Users/Leonardo/Desktop/4_GIERM/Laboratorio_Robotica/Proyecto_Final/SenalLED_ert_rtw/rtGetNaN.c \
+ C:/Users/Leonardo/Desktop/4_GIERM/Laboratorio_Robotica/Proyecto_Final/SenalLED_ert_rtw/rtGetNaN.h \
+ C:/Users/Leonardo/Desktop/4_GIERM/Laboratorio_Robotica/Proyecto_Final/SenalLED_ert_rtw/rtwtypes.h \
+ C:/Users/Leonardo/Desktop/4_GIERM/Laboratorio_Robotica/Proyecto_Final/SenalLED_ert_rtw/rt_nonfinite.h
+
+C:/Users/Leonardo/Desktop/4_GIERM/Laboratorio_Robotica/Proyecto_Final/SenalLED_ert_rtw/rtGetNaN.h:
+
+C:/Users/Leonardo/Desktop/4_GIERM/Laboratorio_Robotica/Proyecto_Final/SenalLED_ert_rtw/rtwtypes.h:
+
+C:/Users/Leonardo/Desktop/4_GIERM/Laboratorio_Robotica/Proyecto_Final/SenalLED_ert_rtw/rt_nonfinite.h:

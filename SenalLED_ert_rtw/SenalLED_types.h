@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'SenalLED'.
  *
- * Model version                  : 7.14
+ * Model version                  : 7.21
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Sun Jan 31 12:32:48 2021
+ * C/C++ source code generated on : Mon Feb  1 17:51:49 2021
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -20,7 +20,6 @@
 #ifndef RTW_HEADER_SenalLED_types_h_
 #define RTW_HEADER_SenalLED_types_h_
 #include "rtwtypes.h"
-#include "multiword_types.h"
 
 /* Model Code Variants */
 #ifndef struct_tag_E7ZjpEHEQzzHgi4oOkm0RC
@@ -60,6 +59,8 @@ typedef struct tag_KPrkuOK6ssObybfxqijZPC codertarget_arduinobase_block_T;
 
 #endif                               /*typedef_codertarget_arduinobase_block_T*/
 
+/* Custom Type definition for MATLABSystem: '<S162>/Izq_Atras' */
+#include "MW_SVD.h"
 #ifndef struct_tag_ioKPFkOtLGdRlGav7pT3yD
 #define struct_tag_ioKPFkOtLGdRlGav7pT3yD
 
@@ -99,6 +100,27 @@ struct tag_2MXFmq8tqMwlyFFQKTNrDC
 typedef struct tag_2MXFmq8tqMwlyFFQKTNrDC codertarget_arduinobase_inter_T;
 
 #endif                               /*typedef_codertarget_arduinobase_inter_T*/
+
+#ifndef struct_tag_lMInmD9zWRzKpUCrv0OfsC
+#define struct_tag_lMInmD9zWRzKpUCrv0OfsC
+
+struct tag_lMInmD9zWRzKpUCrv0OfsC
+{
+  boolean_T matlabCodegenIsDeleted;
+  int32_T isInitialized;
+  boolean_T isSetupComplete;
+  MW_Handle_Type MW_PWM_HANDLE;
+  uint32_T PinPWM;
+};
+
+#endif                                 /*struct_tag_lMInmD9zWRzKpUCrv0OfsC*/
+
+#ifndef typedef_codertarget_arduinobase_int_a_T
+#define typedef_codertarget_arduinobase_int_a_T
+
+typedef struct tag_lMInmD9zWRzKpUCrv0OfsC codertarget_arduinobase_int_a_T;
+
+#endif                               /*typedef_codertarget_arduinobase_int_a_T*/
 
 /* Parameters (default storage) */
 typedef struct P_SenalLED_T_ P_SenalLED_T;

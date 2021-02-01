@@ -1,0 +1,5 @@
+ArduinoPinHandleMap.o: \
+ C:/ProgramData/MATLAB/SupportPackages/R2020b/toolbox/target/supportpackages/arduinobase/src/ArduinoPinHandleMap.cpp \
+ C:/Users/Leonardo/Desktop/4_GIERM/Laboratorio_Robotica/Proyecto_Final/SenalLED_ert_rtw/rtwtypes.h
+
+C:/Users/Leonardo/Desktop/4_GIERM/Laboratorio_Robotica/Proyecto_Final/SenalLED_ert_rtw/rtwtypes.h:

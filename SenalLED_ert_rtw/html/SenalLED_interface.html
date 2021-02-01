@@ -144,7 +144,7 @@ Output entry point of generated code
 Timing
 </td>
 <td width="75%" align="left" valign="top">
-Must be called periodically, every 0.0033333 seconds
+Must be called periodically, every 0.0016667 seconds
 </td>
 
 </tr>
@@ -266,25 +266,31 @@ Interface Parameters
 </h3>
 <span title="Click to shrink or expand table" onclick="rtwTableShrink(this)">[-]</span><table width="100%" class="AltRow FirstColumn" cellspacing="0">
 <tr class="heading">
-<th width="42%" align="left" valign="top">
+<th width="38%" align="left" valign="top">
 <b>
 Parameter Source
 </b>
 
 </th>
-<th width="26%" align="left" valign="top">
+<th width="23%" align="left" valign="top">
 <b>
 Code Identifier
 </b>
 
 </th>
-<th width="21%" align="left" valign="top">
+<th width="19%" align="left" valign="top">
 <b>
 Data Type
 </b>
 
 </th>
-<th width="10%" align="right" valign="top">
+<th width="9%" align="left" valign="top">
+<b>
+Scaling
+</b>
+
+</th>
+<th width="9%" align="right" valign="top">
 <b>
 Dimension
 </b>
@@ -293,166 +299,1119 @@ Dimension
 
 </tr>
 <tr class="even">
-<td width="42%" align="left" valign="top">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:232')" name="code2model" class="code2model">&lt;Root&gt;/PID Controller</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.PIDController_I
+</td>
+<td width="19%" align="left" valign="top">
+real_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="odd">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:123')" name="code2model" class="code2model">&lt;S58&gt;/PID Derecho</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.PIDDerecho_I
+</td>
+<td width="19%" align="left" valign="top">
+real_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:124')" name="code2model" class="code2model">&lt;S58&gt;/PID Izquerdo</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.PIDIzquerdo_I
+</td>
+<td width="19%" align="left" valign="top">
+real_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="odd">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:141')" name="code2model" class="code2model">&lt;S160&gt;/Discrete Derivative</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.DiscreteDerivative_ICPrevScaled
+</td>
+<td width="19%" align="left" valign="top">
+real_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:232')" name="code2model" class="code2model">&lt;Root&gt;/PID Controller</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.PIDController_InitialConditionF
+</td>
+<td width="19%" align="left" valign="top">
+real_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="odd">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:123')" name="code2model" class="code2model">&lt;S58&gt;/PID Derecho</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.PIDDerecho_InitialConditionForI
+</td>
+<td width="19%" align="left" valign="top">
+real_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:124')" name="code2model" class="code2model">&lt;S58&gt;/PID Izquerdo</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.PIDIzquerdo_InitialConditionFor
+</td>
+<td width="19%" align="left" valign="top">
+real_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="odd">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:232')" name="code2model" class="code2model">&lt;Root&gt;/PID Controller</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.PIDController_LowerSaturationLi
+</td>
+<td width="19%" align="left" valign="top">
+real_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:232')" name="code2model" class="code2model">&lt;Root&gt;/PID Controller</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.PIDController_P
+</td>
+<td width="19%" align="left" valign="top">
+real_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="odd">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:123')" name="code2model" class="code2model">&lt;S58&gt;/PID Derecho</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.PIDDerecho_P
+</td>
+<td width="19%" align="left" valign="top">
+real_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:124')" name="code2model" class="code2model">&lt;S58&gt;/PID Izquerdo</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.PIDIzquerdo_P
+</td>
+<td width="19%" align="left" valign="top">
+real_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="odd">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:232')" name="code2model" class="code2model">&lt;Root&gt;/PID Controller</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.PIDController_UpperSaturationLi
+</td>
+<td width="19%" align="left" valign="top">
+real_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:123')" name="code2model" class="code2model">&lt;S58&gt;/PID Derecho</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.PIDDerecho_LowerSaturationLimit
+</td>
+<td width="19%" align="left" valign="top">
+int16_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="odd">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:124')" name="code2model" class="code2model">&lt;S58&gt;/PID Izquerdo</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.PIDIzquerdo_LowerSaturationLimi
+</td>
+<td width="19%" align="left" valign="top">
+int16_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:123')" name="code2model" class="code2model">&lt;S58&gt;/PID Derecho</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.PIDDerecho_UpperSaturationLimit
+</td>
+<td width="19%" align="left" valign="top">
+int16_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="odd">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:124')" name="code2model" class="code2model">&lt;S58&gt;/PID Izquerdo</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.PIDIzquerdo_UpperSaturationLimi
+</td>
+<td width="19%" align="left" valign="top">
+int16_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:148')" name="code2model" class="code2model">&lt;S162&gt;/Compare To Constant1</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.CompareToConstant1_const
+</td>
+<td width="19%" align="left" valign="top">
+int16_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="odd">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:147')" name="code2model" class="code2model">&lt;S162&gt;/Compare To Constant</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.CompareToConstant_const
+</td>
+<td width="19%" align="left" valign="top">
+int16_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="38%" align="left" valign="top">
 <a href="matlab:coder.internal.code2model('SenalLED:78')" name="code2model" class="code2model">&lt;Root&gt;/Serial Receive</a>
 </td>
-<td width="26%" align="left" valign="top">
+<td width="23%" align="left" valign="top">
 SenalLED_P.SerialReceive_Protocol
 </td>
-<td width="21%" align="left" valign="top">
+<td width="19%" align="left" valign="top">
 real_T
 </td>
-<td width="10%" align="right" valign="top">
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
 1
 </td>
 
 </tr>
 <tr class="odd">
-<td width="42%" align="left" valign="top">
-<a href="matlab:coder.internal.code2model('SenalLED:14')" name="code2model" class="code2model">&lt;S1&gt;/Pulse Generator</a>
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:225')" name="code2model" class="code2model">&lt;Root&gt;/Unit Delay</a>
 </td>
-<td width="26%" align="left" valign="top">
+<td width="23%" align="left" valign="top">
+SenalLED_P.UnitDelay_InitialCondition
+</td>
+<td width="19%" align="left" valign="top">
+real_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:227')" name="code2model" class="code2model">&lt;Root&gt;/Unit Delay1</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.UnitDelay1_InitialCondition
+</td>
+<td width="19%" align="left" valign="top">
+real_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="odd">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:208')" name="code2model" class="code2model">&lt;S57&gt;/Integrador Discreto</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.IntegradorDiscreto_gainval
+</td>
+<td width="19%" align="left" valign="top">
+real_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:208')" name="code2model" class="code2model">&lt;S57&gt;/Integrador Discreto</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.IntegradorDiscreto_IC
+</td>
+<td width="19%" align="left" valign="top">
+real_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="odd">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:232:843')" name="code2model" class="code2model">&lt;S37&gt;/Integrator</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.Integrator_gainval
+</td>
+<td width="19%" align="left" valign="top">
+real_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:198')" name="code2model" class="code2model">&lt;S56&gt;/Constant</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.Constant_Value
+</td>
+<td width="19%" align="left" valign="top">
+real_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+[2  2]
+</td>
+
+</tr>
+<tr class="odd">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:127')" name="code2model" class="code2model">&lt;S54&gt;/Memory</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.Memory_InitialCondition
+</td>
+<td width="19%" align="left" valign="top">
+real_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:123:843')" name="code2model" class="code2model">&lt;S93&gt;/Integrator</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.Integrator_gainval_e
+</td>
+<td width="19%" align="left" valign="top">
+real_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="odd">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:124:843')" name="code2model" class="code2model">&lt;S141&gt;/Integrator</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.Integrator_gainval_k
+</td>
+<td width="19%" align="left" valign="top">
+real_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:143')" name="code2model" class="code2model">&lt;S160&gt;/Gain</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.Gain_Gain
+</td>
+<td width="19%" align="left" valign="top">
+real_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="odd">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:141:4')" name="code2model" class="code2model">&lt;S161&gt;/TSamp</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.TSamp_WtEt
+</td>
+<td width="19%" align="left" valign="top">
+real_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:192')" name="code2model" class="code2model">&lt;S55&gt;/Constant</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.Constant_Value_c
+</td>
+<td width="19%" align="left" valign="top">
+real_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+[2  2]
+</td>
+
+</tr>
+<tr class="odd">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:207')" name="code2model" class="code2model">&lt;S57&gt;/Gain</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.Gain_Gain_j
+</td>
+<td width="19%" align="left" valign="top">
+real_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:14')" name="code2model" class="code2model">&lt;S2&gt;/Pulse Generator</a>
+</td>
+<td width="23%" align="left" valign="top">
 SenalLED_P.PulseGenerator_Amp
 </td>
-<td width="21%" align="left" valign="top">
+<td width="19%" align="left" valign="top">
 real_T
 </td>
-<td width="10%" align="right" valign="top">
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
 1
 </td>
 
 </tr>
-<tr class="even">
-<td width="42%" align="left" valign="top">
-<a href="matlab:coder.internal.code2model('SenalLED:14')" name="code2model" class="code2model">&lt;S1&gt;/Pulse Generator</a>
+<tr class="odd">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:14')" name="code2model" class="code2model">&lt;S2&gt;/Pulse Generator</a>
 </td>
-<td width="26%" align="left" valign="top">
+<td width="23%" align="left" valign="top">
 SenalLED_P.PulseGenerator_Period
 </td>
-<td width="21%" align="left" valign="top">
+<td width="19%" align="left" valign="top">
 real_T
 </td>
-<td width="10%" align="right" valign="top">
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
 1
 </td>
 
 </tr>
-<tr class="odd">
-<td width="42%" align="left" valign="top">
-<a href="matlab:coder.internal.code2model('SenalLED:14')" name="code2model" class="code2model">&lt;S1&gt;/Pulse Generator</a>
+<tr class="even">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:14')" name="code2model" class="code2model">&lt;S2&gt;/Pulse Generator</a>
 </td>
-<td width="26%" align="left" valign="top">
+<td width="23%" align="left" valign="top">
 SenalLED_P.PulseGenerator_Duty
 </td>
-<td width="21%" align="left" valign="top">
+<td width="19%" align="left" valign="top">
 real_T
 </td>
-<td width="10%" align="right" valign="top">
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
 1
 </td>
 
 </tr>
-<tr class="even">
-<td width="42%" align="left" valign="top">
-<a href="matlab:coder.internal.code2model('SenalLED:14')" name="code2model" class="code2model">&lt;S1&gt;/Pulse Generator</a>
+<tr class="odd">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:14')" name="code2model" class="code2model">&lt;S2&gt;/Pulse Generator</a>
 </td>
-<td width="26%" align="left" valign="top">
+<td width="23%" align="left" valign="top">
 SenalLED_P.PulseGenerator_PhaseDelay
 </td>
-<td width="21%" align="left" valign="top">
+<td width="19%" align="left" valign="top">
 real_T
 </td>
-<td width="10%" align="right" valign="top">
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
 1
 </td>
 
 </tr>
-<tr class="odd">
-<td width="42%" align="left" valign="top">
-<a href="matlab:coder.internal.code2model('SenalLED:27')" name="code2model" class="code2model">&lt;S1&gt;/Simulation Pace</a>
+<tr class="even">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:27')" name="code2model" class="code2model">&lt;S2&gt;/Simulation Pace</a>
 </td>
-<td width="26%" align="left" valign="top">
+<td width="23%" align="left" valign="top">
 SenalLED_P.SimulationPace_P1
 </td>
-<td width="21%" align="left" valign="top">
+<td width="19%" align="left" valign="top">
 real_T
 </td>
-<td width="10%" align="right" valign="top">
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
 1
 </td>
 
 </tr>
-<tr class="even">
-<td width="42%" align="left" valign="top">
-<a href="matlab:coder.internal.code2model('SenalLED:27')" name="code2model" class="code2model">&lt;S1&gt;/Simulation Pace</a>
+<tr class="odd">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:27')" name="code2model" class="code2model">&lt;S2&gt;/Simulation Pace</a>
 </td>
-<td width="26%" align="left" valign="top">
+<td width="23%" align="left" valign="top">
 SenalLED_P.SimulationPace_P2
 </td>
-<td width="21%" align="left" valign="top">
+<td width="19%" align="left" valign="top">
 real_T
 </td>
-<td width="10%" align="right" valign="top">
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
 1
 </td>
 
 </tr>
-<tr class="odd">
-<td width="42%" align="left" valign="top">
-<a href="matlab:coder.internal.code2model('SenalLED:27')" name="code2model" class="code2model">&lt;S1&gt;/Simulation Pace</a>
+<tr class="even">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:27')" name="code2model" class="code2model">&lt;S2&gt;/Simulation Pace</a>
 </td>
-<td width="26%" align="left" valign="top">
+<td width="23%" align="left" valign="top">
 SenalLED_P.SimulationPace_P3
 </td>
-<td width="21%" align="left" valign="top">
+<td width="19%" align="left" valign="top">
 real_T
 </td>
-<td width="10%" align="right" valign="top">
-1
+<td width="9%" align="left" valign="top">
+&#160;
 </td>
-
-</tr>
-<tr class="even">
-<td width="42%" align="left" valign="top">
-<a href="matlab:coder.internal.code2model('SenalLED:27')" name="code2model" class="code2model">&lt;S1&gt;/Simulation Pace</a>
-</td>
-<td width="26%" align="left" valign="top">
-SenalLED_P.SimulationPace_P4
-</td>
-<td width="21%" align="left" valign="top">
-real_T
-</td>
-<td width="10%" align="right" valign="top">
+<td width="9%" align="right" valign="top">
 1
 </td>
 
 </tr>
 <tr class="odd">
-<td width="42%" align="left" valign="top">
-<a href="matlab:coder.internal.code2model('SenalLED:101')" name="code2model" class="code2model">&lt;S2&gt;/Out1</a>
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:27')" name="code2model" class="code2model">&lt;S2&gt;/Simulation Pace</a>
 </td>
-<td width="26%" align="left" valign="top">
-SenalLED_P.Out1_Y0
+<td width="23%" align="left" valign="top">
+SenalLED_P.SimulationPace_P4
 </td>
-<td width="21%" align="left" valign="top">
-uint16_T
+<td width="19%" align="left" valign="top">
+real_T
 </td>
-<td width="10%" align="right" valign="top">
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
 1
 </td>
 
 </tr>
 <tr class="even">
-<td width="42%" align="left" valign="top">
-<a href="matlab:coder.internal.code2model('SenalLED:64')" name="code2model" class="code2model">&lt;Root&gt;/Data Store Memory</a>
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:174')" name="code2model" class="code2model">&lt;S160&gt;/S-Function Builder</a>
 </td>
-<td width="26%" align="left" valign="top">
-SenalLED_P.DataStoreMemory_InitialValue
+<td width="23%" align="left" valign="top">
+SenalLED_P.SFunctionBuilder_P1
 </td>
-<td width="21%" align="left" valign="top">
+<td width="19%" align="left" valign="top">
+int32_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+[1  2]
+</td>
+
+</tr>
+<tr class="odd">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:174')" name="code2model" class="code2model">&lt;S160&gt;/S-Function Builder</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.SFunctionBuilder_P2
+</td>
+<td width="19%" align="left" valign="top">
+int32_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+[1  2]
+</td>
+
+</tr>
+<tr class="even">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:174')" name="code2model" class="code2model">&lt;S160&gt;/S-Function Builder</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.SFunctionBuilder_P3
+</td>
+<td width="19%" align="left" valign="top">
+int32_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+[1  2]
+</td>
+
+</tr>
+<tr class="odd">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:136')" name="code2model" class="code2model">&lt;S159&gt;/Modelo Rueda Izquierda</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.ModeloRuedaIzquierda_InitialSta
+</td>
+<td width="19%" align="left" valign="top">
+int16_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:135')" name="code2model" class="code2model">&lt;S159&gt;/Modelo Rueda Derecha</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.ModeloRuedaDerecha_InitialState
+</td>
+<td width="19%" align="left" valign="top">
+int16_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="odd">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:168')" name="code2model" class="code2model">&lt;S162&gt;/Saturation2</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.Saturation2_UpperSat
+</td>
+<td width="19%" align="left" valign="top">
+int16_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:168')" name="code2model" class="code2model">&lt;S162&gt;/Saturation2</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.Saturation2_LowerSat
+</td>
+<td width="19%" align="left" valign="top">
+int16_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="odd">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:169')" name="code2model" class="code2model">&lt;S162&gt;/Saturation3</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.Saturation3_UpperSat
+</td>
+<td width="19%" align="left" valign="top">
+int16_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:169')" name="code2model" class="code2model">&lt;S162&gt;/Saturation3</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.Saturation3_LowerSat
+</td>
+<td width="19%" align="left" valign="top">
+int16_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="odd">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:170')" name="code2model" class="code2model">&lt;S162&gt;/Saturation4</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.Saturation4_UpperSat
+</td>
+<td width="19%" align="left" valign="top">
+int16_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:170')" name="code2model" class="code2model">&lt;S162&gt;/Saturation4</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.Saturation4_LowerSat
+</td>
+<td width="19%" align="left" valign="top">
+int16_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="odd">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:167')" name="code2model" class="code2model">&lt;S162&gt;/Saturation</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.Saturation_UpperSat
+</td>
+<td width="19%" align="left" valign="top">
+int16_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:167')" name="code2model" class="code2model">&lt;S162&gt;/Saturation</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.Saturation_LowerSat
+</td>
+<td width="19%" align="left" valign="top">
+int16_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="odd">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:136')" name="code2model" class="code2model">&lt;S159&gt;/Modelo Rueda Izquierda</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.ModeloRuedaIzquierda_DenCoef
+</td>
+<td width="19%" align="left" valign="top">
+int16_T
+</td>
+<td width="9%" align="left" valign="top">
+<span title="  DataTypeMode: Fixed-point: binary point scaling
+    Signedness: Signed
+    WordLength: 16
+FractionLength: 14
+">sfix16_En14</span>
+</td>
+<td width="9%" align="right" valign="top">
+[1  3]
+</td>
+
+</tr>
+<tr class="even">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:135')" name="code2model" class="code2model">&lt;S159&gt;/Modelo Rueda Derecha</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.ModeloRuedaDerecha_DenCoef
+</td>
+<td width="19%" align="left" valign="top">
+int16_T
+</td>
+<td width="9%" align="left" valign="top">
+<span title="  DataTypeMode: Fixed-point: binary point scaling
+    Signedness: Signed
+    WordLength: 16
+FractionLength: 14
+">sfix16_En14</span>
+</td>
+<td width="9%" align="right" valign="top">
+[1  3]
+</td>
+
+</tr>
+<tr class="odd">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:162')" name="code2model" class="code2model">&lt;S162&gt;/Gain1</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.Gain1_Gain
+</td>
+<td width="19%" align="left" valign="top">
+int16_T
+</td>
+<td width="9%" align="left" valign="top">
+<span title="  DataTypeMode: Fixed-point: binary point scaling
+    Signedness: Signed
+    WordLength: 16
+FractionLength: 15
+">sfix16_En15</span>
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:136')" name="code2model" class="code2model">&lt;S159&gt;/Modelo Rueda Izquierda</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.ModeloRuedaIzquierda_NumCoef
+</td>
+<td width="19%" align="left" valign="top">
+int16_T
+</td>
+<td width="9%" align="left" valign="top">
+<span title="  DataTypeMode: Fixed-point: binary point scaling
+    Signedness: Signed
+    WordLength: 16
+FractionLength: 27
+">sfix16_En27</span>
+</td>
+<td width="9%" align="right" valign="top">
+[1  2]
+</td>
+
+</tr>
+<tr class="odd">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:135')" name="code2model" class="code2model">&lt;S159&gt;/Modelo Rueda Derecha</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.ModeloRuedaDerecha_NumCoef
+</td>
+<td width="19%" align="left" valign="top">
+int16_T
+</td>
+<td width="9%" align="left" valign="top">
+<span title="  DataTypeMode: Fixed-point: binary point scaling
+    Signedness: Signed
+    WordLength: 16
+FractionLength: 27
+">sfix16_En27</span>
+</td>
+<td width="9%" align="right" valign="top">
+[1  2]
+</td>
+
+</tr>
+<tr class="even">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:101')" name="code2model" class="code2model">&lt;S4&gt;/Dato</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.Dato_Y0
+</td>
+<td width="19%" align="left" valign="top">
 uint16_T
 </td>
-<td width="10%" align="right" valign="top">
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="odd">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:64')" name="code2model" class="code2model">&lt;Root&gt;/Data Store Memory</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.DataStoreMemory_InitialValue
+</td>
+<td width="19%" align="left" valign="top">
+uint16_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
+1
+</td>
+
+</tr>
+<tr class="even">
+<td width="38%" align="left" valign="top">
+<a href="matlab:coder.internal.code2model('SenalLED:130:13')" name="code2model" class="code2model">&lt;S158&gt;/Switch Control</a>
+</td>
+<td width="23%" align="left" valign="top">
+SenalLED_P.SwitchControl_Value
+</td>
+<td width="19%" align="left" valign="top">
+boolean_T
+</td>
+<td width="9%" align="left" valign="top">
+&#160;
+</td>
+<td width="9%" align="right" valign="top">
 1
 </td>
 
