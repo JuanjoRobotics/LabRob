@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'SenalLED'.
  *
- * Model version                  : 7.21
+ * Model version                  : 7.31
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Mon Feb  1 17:51:49 2021
+ * C/C++ source code generated on : Tue Feb  2 18:19:05 2021
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -117,10 +117,45 @@ P_SenalLED_T SenalLED_P = {
    */
   0.0,
 
+  /* Expression: 1
+   * Referenced by: '<S2>/Pulse Generator'
+   */
+  1.0,
+
+  /* Computed Parameter: PulseGenerator_Period
+   * Referenced by: '<S2>/Pulse Generator'
+   */
+  5.0,
+
+  /* Computed Parameter: PulseGenerator_Duty
+   * Referenced by: '<S2>/Pulse Generator'
+   */
+  2.0,
+
   /* Expression: 0
-   * Referenced by: '<Root>/Unit Delay'
+   * Referenced by: '<S2>/Pulse Generator'
    */
   0.0,
+
+  /* Expression: SimulationPace
+   * Referenced by: '<S2>/Simulation Pace'
+   */
+  1.0,
+
+  /* Expression: SleepMode
+   * Referenced by: '<S2>/Simulation Pace'
+   */
+  2.0,
+
+  /* Expression: OutputPaceError
+   * Referenced by: '<S2>/Simulation Pace'
+   */
+  0.0,
+
+  /* Expression: SampleTime
+   * Referenced by: '<S2>/Simulation Pace'
+   */
+  0.033333333333333333,
 
   /* Expression: 0
    * Referenced by: '<Root>/Unit Delay1'
@@ -182,46 +217,6 @@ P_SenalLED_T SenalLED_P = {
    */
   1.0,
 
-  /* Expression: 1
-   * Referenced by: '<S2>/Pulse Generator'
-   */
-  1.0,
-
-  /* Computed Parameter: PulseGenerator_Period
-   * Referenced by: '<S2>/Pulse Generator'
-   */
-  5.0,
-
-  /* Computed Parameter: PulseGenerator_Duty
-   * Referenced by: '<S2>/Pulse Generator'
-   */
-  2.0,
-
-  /* Expression: 0
-   * Referenced by: '<S2>/Pulse Generator'
-   */
-  0.0,
-
-  /* Expression: SimulationPace
-   * Referenced by: '<S2>/Simulation Pace'
-   */
-  1.0,
-
-  /* Expression: SleepMode
-   * Referenced by: '<S2>/Simulation Pace'
-   */
-  2.0,
-
-  /* Expression: OutputPaceError
-   * Referenced by: '<S2>/Simulation Pace'
-   */
-  0.0,
-
-  /* Expression: SampleTime
-   * Referenced by: '<S2>/Simulation Pace'
-   */
-  0.033333333333333333,
-
   /* Expression: int32([0,1])
    * Referenced by: '<S160>/S-Function Builder'
    */
@@ -247,25 +242,15 @@ P_SenalLED_T SenalLED_P = {
    */
   0,
 
-  /* Computed Parameter: Saturation2_UpperSat
-   * Referenced by: '<S162>/Saturation2'
+  /* Computed Parameter: Saturation_UpperSat
+   * Referenced by: '<S162>/Saturation'
    */
   255,
 
-  /* Computed Parameter: Saturation2_LowerSat
-   * Referenced by: '<S162>/Saturation2'
+  /* Computed Parameter: Saturation_LowerSat
+   * Referenced by: '<S162>/Saturation'
    */
   0,
-
-  /* Computed Parameter: Saturation3_UpperSat
-   * Referenced by: '<S162>/Saturation3'
-   */
-  0,
-
-  /* Computed Parameter: Saturation3_LowerSat
-   * Referenced by: '<S162>/Saturation3'
-   */
-  -255,
 
   /* Computed Parameter: Saturation4_UpperSat
    * Referenced by: '<S162>/Saturation4'
@@ -277,13 +262,23 @@ P_SenalLED_T SenalLED_P = {
    */
   -255,
 
-  /* Computed Parameter: Saturation_UpperSat
-   * Referenced by: '<S162>/Saturation'
+  /* Computed Parameter: Saturation3_UpperSat
+   * Referenced by: '<S162>/Saturation3'
+   */
+  0,
+
+  /* Computed Parameter: Saturation3_LowerSat
+   * Referenced by: '<S162>/Saturation3'
+   */
+  -255,
+
+  /* Computed Parameter: Saturation2_UpperSat
+   * Referenced by: '<S162>/Saturation2'
    */
   255,
 
-  /* Computed Parameter: Saturation_LowerSat
-   * Referenced by: '<S162>/Saturation'
+  /* Computed Parameter: Saturation2_LowerSat
+   * Referenced by: '<S162>/Saturation2'
    */
   0,
 

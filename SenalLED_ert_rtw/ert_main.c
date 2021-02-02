@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'SenalLED'.
  *
- * Model version                  : 7.21
+ * Model version                  : 7.31
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Mon Feb  1 17:51:49 2021
+ * C/C++ source code generated on : Tue Feb  2 18:19:05 2021
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -19,6 +19,8 @@
 
 #include "SenalLED.h"
 #include "rtwtypes.h"
+#include "xcp.h"
+#include "ext_work.h"
 
 volatile int IsrOverrun = 0;
 static boolean_T OverrunFlag = 0;
@@ -47,8 +49,10 @@ void rt_OneStep(void)
 #endif;
 
   OverrunFlag--;
+  rtExtModeCheckEndTrigger();
 }
 
+extern void rtIOStreamResync();
 volatile boolean_T stopRequested;
 volatile boolean_T runModel;
 int main(void)
@@ -62,11 +66,30 @@ int main(void)
   init();
   MW_Arduino_Init();
   rtmSetErrorStatus(SenalLED_M, 0);
+
+  /* initialize external mode */
+  rtParseArgsForExtMode(0, NULL);
   SenalLED_initialize();
+  cli();
+  sei();
+
+  /* External mode */
+  rtSetTFinalForExtMode(&rtmGetTFinal(SenalLED_M));
+  rtExtModeCheckInit(7);
+
+  {
+    boolean_T rtmStopReq = false;
+    rtExtModeWaitForStartPkt(SenalLED_M->extModeInfo, 7, &rtmStopReq);
+    if (rtmStopReq) {
+      rtmSetStopRequested(SenalLED_M, true);
+    }
+  }
+
+  rtERTExtModeStartMsg();
   cli();
   configureArduinoAVRTimer();
   runModel =
-    rtmGetErrorStatus(SenalLED_M) == (NULL);
+    (rtmGetErrorStatus(SenalLED_M) == (NULL)) && !rtmGetStopRequested(SenalLED_M);
 
 #ifndef _MW_ARDUINO_LOOP_
 
@@ -74,11 +97,27 @@ int main(void)
 
 #endif;
 
+  XcpStatus lastXcpState = xcpStatusGet();
   sei();
   while (runModel) {
+    /* External mode */
+    {
+      boolean_T rtmStopReq = false;
+      rtExtModeOneStep(SenalLED_M->extModeInfo, 7, &rtmStopReq);
+      if (rtmStopReq) {
+        rtmSetStopRequested(SenalLED_M, true);
+      }
+    }
+
     stopRequested = !(
-                      rtmGetErrorStatus(SenalLED_M) == (NULL));
+                      (rtmGetErrorStatus(SenalLED_M) == (NULL)) &&
+                      !rtmGetStopRequested(SenalLED_M));
     runModel = !(stopRequested);
+    if (stopRequested)
+      disable_rt_OneStep();
+    if (lastXcpState==XCP_CONNECTED && xcpStatusGet()==XCP_DISCONNECTED)
+      rtIOStreamResync();
+    lastXcpState = xcpStatusGet();
     MW_Arduino_Loop();
   }
 
@@ -86,6 +125,7 @@ int main(void)
 
   /* Terminate model */
   SenalLED_terminate();
+  rtExtModeShutdown(7);
   cli();
   return 0;
 }

@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'SenalLED'.
  *
- * Model version                  : 7.21
+ * Model version                  : 7.31
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Mon Feb  1 17:51:49 2021
+ * C/C++ source code generated on : Tue Feb  2 18:19:05 2021
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -20,13 +20,17 @@
 #ifndef RTW_HEADER_SenalLED_h_
 #define RTW_HEADER_SenalLED_h_
 #include <math.h>
+#include <float.h>
 #include <string.h>
 #include <stddef.h>
 #ifndef SenalLED_COMMON_INCLUDES_
 #define SenalLED_COMMON_INCLUDES_
 #include "rtwtypes.h"
+#include "rtw_extmode.h"
+#include "sysran_types.h"
 #include "rtw_continuous.h"
 #include "rtw_solver.h"
+#include "ext_work.h"
 #include "MW_arduino_digitalio.h"
 #include "MW_SerialRead.h"
 #include "MW_SerialWrite.h"
@@ -34,11 +38,22 @@
 #endif                                 /* SenalLED_COMMON_INCLUDES_ */
 
 #include "SenalLED_types.h"
+
+/* Shared type includes */
+#include "multiword_types.h"
 #include "MW_target_hardware_resources.h"
 #include "rt_nonfinite.h"
 #include "rtGetInf.h"
 
 /* Macros for accessing real-time model data structure */
+#ifndef rtmGetFinalTime
+#define rtmGetFinalTime(rtm)           ((rtm)->Timing.tFinal)
+#endif
+
+#ifndef rtmGetRTWExtModeInfo
+#define rtmGetRTWExtModeInfo(rtm)      ((rtm)->extModeInfo)
+#endif
+
 #ifndef rtmGetErrorStatus
 #define rtmGetErrorStatus(rtm)         ((rtm)->errorStatus)
 #endif
@@ -47,9 +62,33 @@
 #define rtmSetErrorStatus(rtm, val)    ((rtm)->errorStatus = (val))
 #endif
 
+#ifndef rtmGetStopRequested
+#define rtmGetStopRequested(rtm)       ((rtm)->Timing.stopRequestedFlag)
+#endif
+
+#ifndef rtmSetStopRequested
+#define rtmSetStopRequested(rtm, val)  ((rtm)->Timing.stopRequestedFlag = (val))
+#endif
+
+#ifndef rtmGetStopRequestedPtr
+#define rtmGetStopRequestedPtr(rtm)    (&((rtm)->Timing.stopRequestedFlag))
+#endif
+
+#ifndef rtmGetT
+#define rtmGetT(rtm)                   ((rtm)->Timing.taskTime0)
+#endif
+
+#ifndef rtmGetTFinal
+#define rtmGetTFinal(rtm)              ((rtm)->Timing.tFinal)
+#endif
+
+#ifndef rtmGetTPtr
+#define rtmGetTPtr(rtm)                (&(rtm)->Timing.taskTime0)
+#endif
+
 /* Block signals (default storage) */
 typedef struct {
-  real_T UnitDelay;                    /* '<Root>/Unit Delay' */
+  real_T PulseGenerator;               /* '<S2>/Pulse Generator' */
   real_T UnitDelay1;                   /* '<Root>/Unit Delay1' */
   real_T IntegradorDiscreto[3];        /* '<S57>/Integrador Discreto' */
   real_T MatrixMultiply[2];            /* '<S56>/Matrix Multiply' */
@@ -61,14 +100,25 @@ typedef struct {
   real_T Sin;                          /* '<S57>/Sin' */
   real_T Product;                      /* '<S57>/Product' */
   real_T Product1;                     /* '<S57>/Product1' */
-  real_T PulseGenerator;               /* '<S2>/Pulse Generator' */
-  real_T V;                            /* '<Root>/Chart' */
-  real_T O;                            /* '<Root>/Chart' */
+  real_T V;                            /* '<Root>/Chart1' */
+  real_T O;                            /* '<Root>/Chart1' */
+  real_T Saturation_m;                 /* '<S44>/Saturation' */
   real_T IntegralGain_a;               /* '<S138>/Integral Gain' */
   real_T IntegralGain_e;               /* '<S90>/Integral Gain' */
   uint16_T In1;                        /* '<S4>/In1' */
+  uint16_T SerialReceive_o1;           /* '<Root>/Serial Receive' */
   int16_T Saturation;                  /* '<S100>/Saturation' */
   int16_T Saturation_n;                /* '<S148>/Saturation' */
+  int16_T Saturation_c;                /* '<S162>/Saturation' */
+  int16_T Abs1;                        /* '<S162>/Abs1' */
+  int16_T Saturation2;                 /* '<S162>/Saturation2' */
+  uint8_T IntegertoBitConverter1[4];   /* '<S2>/Integer to Bit Converter1' */
+  uint8_T Gain1;                       /* '<S162>/Gain1' */
+  boolean_T LogicalOperator2;          /* '<S2>/Logical Operator2' */
+  boolean_T LogicalOperator1;          /* '<S2>/Logical Operator1' */
+  boolean_T LogicalOperator;           /* '<S2>/Logical Operator' */
+  boolean_T Compare;                   /* '<S164>/Compare' */
+  boolean_T Compare_a;                 /* '<S163>/Compare' */
 } B_SenalLED_T;
 
 /* Block states (default storage) for system '<Root>' */
@@ -83,7 +133,6 @@ typedef struct {
   codertarget_arduinobase_block_T obj_p;/* '<S2>/RED' */
   codertarget_arduinobase_block_T obj_g;/* '<S2>/GREEN' */
   codertarget_arduinobase_block_T obj_h;/* '<S2>/BLUE' */
-  real_T UnitDelay_DSTATE;             /* '<Root>/Unit Delay' */
   real_T UnitDelay1_DSTATE;            /* '<Root>/Unit Delay1' */
   real_T IntegradorDiscreto_DSTATE[3]; /* '<S57>/Integrador Discreto' */
   real_T Integrator_DSTATE;            /* '<S37>/Integrator' */
@@ -91,12 +140,98 @@ typedef struct {
   real_T Integrator_DSTATE_h;          /* '<S141>/Integrator' */
   real_T SFunctionBuilder_DSTATE;      /* '<S160>/S-Function Builder' */
   real_T UD_DSTATE[2];                 /* '<S161>/UD' */
+  real_T velocidad;                    /* '<Root>/Chart1' */
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Leds_;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Led_h;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Led_g;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Integ;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Logic;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Log_o;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Log_a;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Pulse;   /* synthesized block */
+
+  struct {
+    void *LoggedData[2];
+  } Scope_PWORK;                       /* '<Root>/Scope' */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Chart;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Demux;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Dem_n;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Seria;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Subsy;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_SFunc;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Abs1_;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Compa;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Com_j;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Gain1;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Satur;   /* synthesized block */
+
+  struct {
+    void *AQHandles;
+  } TAQSigLogging_InsertedFor_Sat_b;   /* synthesized block */
+
   int32_T clockTickCounter;            /* '<S2>/Pulse Generator' */
+  uint32_T is_c1_SenalLED;             /* '<Root>/Chart1' */
   int16_T ModeloRuedaIzquierda_states[2];/* '<S159>/Modelo Rueda Izquierda' */
   int16_T ModeloRuedaDerecha_states[2];/* '<S159>/Modelo Rueda Derecha' */
   uint16_T senal;                      /* '<Root>/Data Store Memory' */
-  uint8_T is_active_c3_SenalLED;       /* '<Root>/Chart' */
-  uint8_T is_c3_SenalLED;              /* '<Root>/Chart' */
+  int8_T Subsystem_SubsysRanBC;        /* '<Root>/Subsystem' */
+  uint8_T is_active_c1_SenalLED;       /* '<Root>/Chart1' */
 } DW_SenalLED_T;
 
 /* Parameters (default storage) */
@@ -168,8 +303,29 @@ struct P_SenalLED_T_ {
   real_T SerialReceive_Protocol;       /* Expression: 0
                                         * Referenced by: '<Root>/Serial Receive'
                                         */
-  real_T UnitDelay_InitialCondition;   /* Expression: 0
-                                        * Referenced by: '<Root>/Unit Delay'
+  real_T PulseGenerator_Amp;           /* Expression: 1
+                                        * Referenced by: '<S2>/Pulse Generator'
+                                        */
+  real_T PulseGenerator_Period;     /* Computed Parameter: PulseGenerator_Period
+                                     * Referenced by: '<S2>/Pulse Generator'
+                                     */
+  real_T PulseGenerator_Duty;         /* Computed Parameter: PulseGenerator_Duty
+                                       * Referenced by: '<S2>/Pulse Generator'
+                                       */
+  real_T PulseGenerator_PhaseDelay;    /* Expression: 0
+                                        * Referenced by: '<S2>/Pulse Generator'
+                                        */
+  real_T SimulationPace_P1;            /* Expression: SimulationPace
+                                        * Referenced by: '<S2>/Simulation Pace'
+                                        */
+  real_T SimulationPace_P2;            /* Expression: SleepMode
+                                        * Referenced by: '<S2>/Simulation Pace'
+                                        */
+  real_T SimulationPace_P3;            /* Expression: OutputPaceError
+                                        * Referenced by: '<S2>/Simulation Pace'
+                                        */
+  real_T SimulationPace_P4;            /* Expression: SampleTime
+                                        * Referenced by: '<S2>/Simulation Pace'
                                         */
   real_T UnitDelay1_InitialCondition;  /* Expression: 0
                                         * Referenced by: '<Root>/Unit Delay1'
@@ -208,30 +364,6 @@ struct P_SenalLED_T_ {
   real_T Gain_Gain_j;                  /* Expression: 1
                                         * Referenced by: '<S57>/Gain'
                                         */
-  real_T PulseGenerator_Amp;           /* Expression: 1
-                                        * Referenced by: '<S2>/Pulse Generator'
-                                        */
-  real_T PulseGenerator_Period;     /* Computed Parameter: PulseGenerator_Period
-                                     * Referenced by: '<S2>/Pulse Generator'
-                                     */
-  real_T PulseGenerator_Duty;         /* Computed Parameter: PulseGenerator_Duty
-                                       * Referenced by: '<S2>/Pulse Generator'
-                                       */
-  real_T PulseGenerator_PhaseDelay;    /* Expression: 0
-                                        * Referenced by: '<S2>/Pulse Generator'
-                                        */
-  real_T SimulationPace_P1;            /* Expression: SimulationPace
-                                        * Referenced by: '<S2>/Simulation Pace'
-                                        */
-  real_T SimulationPace_P2;            /* Expression: SleepMode
-                                        * Referenced by: '<S2>/Simulation Pace'
-                                        */
-  real_T SimulationPace_P3;            /* Expression: OutputPaceError
-                                        * Referenced by: '<S2>/Simulation Pace'
-                                        */
-  real_T SimulationPace_P4;            /* Expression: SampleTime
-                                        * Referenced by: '<S2>/Simulation Pace'
-                                        */
   int32_T SFunctionBuilder_P1[2];      /* Expression: int32([0,1])
                                         * Referenced by: '<S160>/S-Function Builder'
                                         */
@@ -249,11 +381,17 @@ struct P_SenalLED_T_ {
                           /* Computed Parameter: ModeloRuedaDerecha_InitialState
                            * Referenced by: '<S159>/Modelo Rueda Derecha'
                            */
-  int16_T Saturation2_UpperSat;      /* Computed Parameter: Saturation2_UpperSat
-                                      * Referenced by: '<S162>/Saturation2'
+  int16_T Saturation_UpperSat;        /* Computed Parameter: Saturation_UpperSat
+                                       * Referenced by: '<S162>/Saturation'
+                                       */
+  int16_T Saturation_LowerSat;        /* Computed Parameter: Saturation_LowerSat
+                                       * Referenced by: '<S162>/Saturation'
+                                       */
+  int16_T Saturation4_UpperSat;      /* Computed Parameter: Saturation4_UpperSat
+                                      * Referenced by: '<S162>/Saturation4'
                                       */
-  int16_T Saturation2_LowerSat;      /* Computed Parameter: Saturation2_LowerSat
-                                      * Referenced by: '<S162>/Saturation2'
+  int16_T Saturation4_LowerSat;      /* Computed Parameter: Saturation4_LowerSat
+                                      * Referenced by: '<S162>/Saturation4'
                                       */
   int16_T Saturation3_UpperSat;      /* Computed Parameter: Saturation3_UpperSat
                                       * Referenced by: '<S162>/Saturation3'
@@ -261,18 +399,12 @@ struct P_SenalLED_T_ {
   int16_T Saturation3_LowerSat;      /* Computed Parameter: Saturation3_LowerSat
                                       * Referenced by: '<S162>/Saturation3'
                                       */
-  int16_T Saturation4_UpperSat;      /* Computed Parameter: Saturation4_UpperSat
-                                      * Referenced by: '<S162>/Saturation4'
+  int16_T Saturation2_UpperSat;      /* Computed Parameter: Saturation2_UpperSat
+                                      * Referenced by: '<S162>/Saturation2'
                                       */
-  int16_T Saturation4_LowerSat;      /* Computed Parameter: Saturation4_LowerSat
-                                      * Referenced by: '<S162>/Saturation4'
+  int16_T Saturation2_LowerSat;      /* Computed Parameter: Saturation2_LowerSat
+                                      * Referenced by: '<S162>/Saturation2'
                                       */
-  int16_T Saturation_UpperSat;        /* Computed Parameter: Saturation_UpperSat
-                                       * Referenced by: '<S162>/Saturation'
-                                       */
-  int16_T Saturation_LowerSat;        /* Computed Parameter: Saturation_LowerSat
-                                       * Referenced by: '<S162>/Saturation'
-                                       */
   int16_T ModeloRuedaIzquierda_DenCoef[3];
                              /* Computed Parameter: ModeloRuedaIzquierda_DenCoef
                               * Referenced by: '<S159>/Modelo Rueda Izquierda'
@@ -307,6 +439,26 @@ struct P_SenalLED_T_ {
 /* Real-time Model Data Structure */
 struct tag_RTM_SenalLED_T {
   const char_T *errorStatus;
+  RTWExtModeInfo *extModeInfo;
+
+  /*
+   * Sizes:
+   * The following substructure contains sizes information
+   * for many of the model attributes such as inputs, outputs,
+   * dwork, sample times, etc.
+   */
+  struct {
+    uint32_T checksums[4];
+  } Sizes;
+
+  /*
+   * SpecialInfo:
+   * The following substructure contains special information
+   * related to other components that are dependent on RTW.
+   */
+  struct {
+    const void *mappingInfo;
+  } SpecialInfo;
 
   /*
    * Timing:
@@ -314,9 +466,21 @@ struct tag_RTM_SenalLED_T {
    * the timing information for the model.
    */
   struct {
+    time_T taskTime0;
+    uint32_T clockTick0;
+    time_T stepSize0;
+    uint32_T clockTick1;
+    uint32_T clockTick2;
+    uint32_T clockTick3;
+    uint32_T clockTick4;
+    uint32_T clockTick5;
+    uint32_T clockTick6;
     struct {
       uint16_T TID[7];
     } TaskCounters;
+
+    time_T tFinal;
+    boolean_T stopRequestedFlag;
   } Timing;
 };
 
@@ -342,24 +506,7 @@ extern volatile boolean_T runModel;
 /*-
  * These blocks were eliminated from the model due to optimizations:
  *
- * Block '<Root>/A' : Unused code path elimination
- * Block '<Root>/Display' : Unused code path elimination
- * Block '<Root>/Display1' : Unused code path elimination
- * Block '<Root>/Display2' : Unused code path elimination
- * Block '<Root>/Display3' : Unused code path elimination
- * Block '<S2>/Display' : Unused code path elimination
- * Block '<S2>/Integer to Bit Converter1' : Unused code path elimination
- * Block '<Root>/R' : Unused code path elimination
- * Block '<Root>/Scope' : Unused code path elimination
  * Block '<S161>/Data Type Duplicate' : Unused code path elimination
- * Block '<S160>/Display2' : Unused code path elimination
- * Block '<S162>/Display' : Unused code path elimination
- * Block '<S162>/Display1' : Unused code path elimination
- * Block '<S162>/Display2' : Unused code path elimination
- * Block '<S162>/Display3' : Unused code path elimination
- * Block '<S162>/Display4' : Unused code path elimination
- * Block '<S162>/Display5' : Unused code path elimination
- * Block '<Root>/V' : Unused code path elimination
  * Block '<S58>/Data Type Conversion' : Eliminate redundant data type conversion
  * Block '<S158>/Numerical Unity' : Eliminate redundant signal conversion block
  */
@@ -379,7 +526,7 @@ extern volatile boolean_T runModel;
  * Here is the system hierarchy for this model
  *
  * '<Root>' : 'SenalLED'
- * '<S1>'   : 'SenalLED/Chart'
+ * '<S1>'   : 'SenalLED/Chart1'
  * '<S2>'   : 'SenalLED/Leds_RGB '
  * '<S3>'   : 'SenalLED/PID Controller'
  * '<S4>'   : 'SenalLED/Subsystem'

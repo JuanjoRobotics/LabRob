@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'SenalLED'.
  *
- * Model version                  : 7.21
+ * Model version                  : 7.31
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Mon Feb  1 17:51:49 2021
+ * C/C++ source code generated on : Tue Feb  2 18:19:05 2021
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -20,6 +20,13 @@
 #ifndef RTW_HEADER_SenalLED_private_h_
 #define RTW_HEADER_SenalLED_private_h_
 #include "rtwtypes.h"
+#include "multiword_types.h"
+
+/* Private macros used by the generated code to access rtModel */
+#ifndef rtmSetTFinal
+#define rtmSetTFinal(rtm, val)         ((rtm)->Timing.tFinal = (val))
+#endif
+
 #ifndef UCHAR_MAX
 #include <limits.h>
 #endif

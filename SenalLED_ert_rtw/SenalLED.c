@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'SenalLED'.
  *
- * Model version                  : 7.21
+ * Model version                  : 7.31
  * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Mon Feb  1 17:51:49 2021
+ * C/C++ source code generated on : Tue Feb  2 18:19:05 2021
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Atmel->AVR
@@ -20,13 +20,14 @@
 #include "SenalLED.h"
 #include "SenalLED_private.h"
 
-/* Named constants for Chart: '<Root>/Chart' */
-#define SenalLED_IN_Aumento_Vel        ((uint8_T)1U)
-#define SenalLED_IN_Decrementa_Vel     ((uint8_T)2U)
-#define SenalLED_IN_Giro_Derecha       ((uint8_T)3U)
-#define SenalLED_IN_Giro_Izq           ((uint8_T)4U)
-#define SenalLED_IN_NO_ACTIVE_CHILD    ((uint8_T)0U)
-#define SenalLED_IN_Normal             ((uint8_T)5U)
+/* Named constants for Chart: '<Root>/Chart1' */
+#define SenalLED_IN_Asigna_25          (1UL)
+#define SenalLED_IN_Asigna_50          (2UL)
+#define SenalLED_IN_Asigna_75          (3UL)
+#define SenalLED_IN_Avanza             (4UL)
+#define SenalLED_IN_Giro_Der           (5UL)
+#define SenalLED_IN_Giro_Izq           (6UL)
+#define SenalLED_IN_Reposo             (7UL)
 
 /* Block signals (default storage) */
 B_SenalLED_T SenalLED_B;
@@ -165,42 +166,239 @@ void SenalLED_step(void)
   real_T tmp;
   int32_T denAccum;
   int16_T y;
-  uint16_T b_dataOut;
+  uint16_T u;
+  uint8_T LogicalOperator2_tmp;
   uint8_T rtb_IntegertoBitConverter_idx_1;
   uint8_T status;
   boolean_T rtb_LogicalOperator4;
+
+  /* Reset subsysRan breadcrumbs */
+  srClearBC(SenalLED_DW.Subsystem_SubsysRanBC);
   if (SenalLED_M->Timing.TaskCounters.TID[2] == 0) {
-    /* MATLABSystem: '<Root>/Serial Receive' incorporates:
-     *  Inport: '<S4>/In1'
-     */
+    /* MATLABSystem: '<Root>/Serial Receive' */
     if (SenalLED_DW.obj.Protocol != SenalLED_P.SerialReceive_Protocol) {
       SenalLED_DW.obj.Protocol = SenalLED_P.SerialReceive_Protocol;
     }
 
-    MW_Serial_read(3, SenalLED_DW.obj.DataSizeInBytes, &b_dataOut, &status);
+    /* MATLABSystem: '<Root>/Serial Receive' */
+    MW_Serial_read(3, SenalLED_DW.obj.DataSizeInBytes,
+                   &SenalLED_B.SerialReceive_o1, &status);
 
     /* Outputs for Enabled SubSystem: '<Root>/Subsystem' incorporates:
      *  EnablePort: '<S4>/Enable'
      */
+    /* MATLABSystem: '<Root>/Serial Receive' incorporates:
+     *  Inport: '<S4>/In1'
+     */
     if (status > 0) {
-      SenalLED_B.In1 = b_dataOut;
+      SenalLED_B.In1 = SenalLED_B.SerialReceive_o1;
+      srUpdateBC(SenalLED_DW.Subsystem_SubsysRanBC);
     }
 
-    /* End of MATLABSystem: '<Root>/Serial Receive' */
     /* End of Outputs for SubSystem: '<Root>/Subsystem' */
+  }
+
+  if (SenalLED_M->Timing.TaskCounters.TID[6] == 0) {
+    /* DiscretePulseGenerator: '<S2>/Pulse Generator' */
+    SenalLED_B.PulseGenerator = (SenalLED_DW.clockTickCounter <
+      SenalLED_P.PulseGenerator_Duty) && (SenalLED_DW.clockTickCounter >= 0L) ?
+      SenalLED_P.PulseGenerator_Amp : 0.0;
+
+    /* DiscretePulseGenerator: '<S2>/Pulse Generator' */
+    if (SenalLED_DW.clockTickCounter >= SenalLED_P.PulseGenerator_Period - 1.0)
+    {
+      SenalLED_DW.clockTickCounter = 0L;
+    } else {
+      SenalLED_DW.clockTickCounter++;
+    }
   }
 
   if (SenalLED_M->Timing.TaskCounters.TID[5] == 0) {
     /* DataStoreWrite: '<Root>/Data Store Write' */
     SenalLED_DW.senal = SenalLED_B.In1;
+
+    /* S-Function (scominttobit): '<S2>/Integer to Bit Converter' incorporates:
+     *  DataStoreRead: '<S2>/Data Store Read'
+     */
+    /* Integer to Bit Conversion */
+    u = SenalLED_DW.senal >> 1;
+    status = (uint8_T)((int16_T)u & 1);
+    u >>= 1;
+    rtb_IntegertoBitConverter_idx_1 = (uint8_T)((int16_T)u & 1);
+    u >>= 1;
+
+    /* Logic: '<S2>/Logical Operator4' incorporates:
+     *  Logic: '<S2>/Logical Operator3'
+     *  S-Function (scominttobit): '<S2>/Integer to Bit Converter'
+     */
+    rtb_LogicalOperator4 = ((SenalLED_B.PulseGenerator != 0.0) || ((uint8_T)
+      ((int16_T)u & 1) == 0));
+
+    /* S-Function (scominttobit): '<S2>/Integer to Bit Converter' incorporates:
+     *  DataStoreRead: '<S2>/Data Store Read'
+     *  S-Function (scominttobit): '<S2>/Integer to Bit Converter1'
+     */
+    LogicalOperator2_tmp = (uint8_T)((int16_T)SenalLED_DW.senal & 1);
+
+    /* Logic: '<S2>/Logical Operator2' incorporates:
+     *  S-Function (scominttobit): '<S2>/Integer to Bit Converter'
+     */
+    SenalLED_B.LogicalOperator2 = (rtb_LogicalOperator4 && (LogicalOperator2_tmp
+      != 0));
+
+    /* Logic: '<S2>/Logical Operator1' */
+    SenalLED_B.LogicalOperator1 = (rtb_LogicalOperator4 && (status != 0));
+
+    /* Logic: '<S2>/Logical Operator' */
+    SenalLED_B.LogicalOperator = (rtb_LogicalOperator4 &&
+      (rtb_IntegertoBitConverter_idx_1 != 0));
+
+    /* MATLABSystem: '<S2>/BLUE' */
+    writeDigitalPin(49, (uint8_T)SenalLED_B.LogicalOperator2);
+
+    /* S-Function (scominttobit): '<S2>/Integer to Bit Converter1' incorporates:
+     *  DataStoreRead: '<S2>/Data Store Read'
+     */
+    /* Integer to Bit Conversion */
+    SenalLED_B.IntegertoBitConverter1[3L] = LogicalOperator2_tmp;
+    u = SenalLED_DW.senal >> 1;
+    SenalLED_B.IntegertoBitConverter1[2L] = (uint8_T)((int16_T)u & 1);
+    u >>= 1;
+    SenalLED_B.IntegertoBitConverter1[1L] = (uint8_T)((int16_T)u & 1);
+    u >>= 1;
+    SenalLED_B.IntegertoBitConverter1[0L] = (uint8_T)((int16_T)u & 1);
+
+    /* MATLABSystem: '<S2>/GREEN' */
+    writeDigitalPin(53, (uint8_T)SenalLED_B.LogicalOperator);
+
+    /* MATLABSystem: '<S2>/RED' */
+    writeDigitalPin(51, (uint8_T)SenalLED_B.LogicalOperator1);
+  }
+
+  if (SenalLED_M->Timing.TaskCounters.TID[6] == 0) {
+  }
+
+  if (SenalLED_M->Timing.TaskCounters.TID[4] == 0) {
+    /* S-Function (saeroclockpacer): '<S2>/Simulation Pace' */
+    /*
+     * The Clock Pacer generates no code, it is only active in
+     * interpreted simulation.
+     */
   }
 
   if (SenalLED_M->Timing.TaskCounters.TID[3] == 0) {
-    /* UnitDelay: '<Root>/Unit Delay' */
-    SenalLED_B.UnitDelay = SenalLED_DW.UnitDelay_DSTATE;
-
     /* UnitDelay: '<Root>/Unit Delay1' */
     SenalLED_B.UnitDelay1 = SenalLED_DW.UnitDelay1_DSTATE;
+  }
+
+  if (SenalLED_M->Timing.TaskCounters.TID[1] == 0) {
+    /* Chart: '<Root>/Chart1' */
+    if (SenalLED_DW.is_active_c1_SenalLED == 0U) {
+      SenalLED_DW.is_active_c1_SenalLED = 1U;
+      SenalLED_DW.is_c1_SenalLED = SenalLED_IN_Reposo;
+      SenalLED_B.V = 0.0;
+      SenalLED_B.O = SenalLED_B.UnitDelay1;
+    } else {
+      switch (SenalLED_DW.is_c1_SenalLED) {
+       case SenalLED_IN_Asigna_25:
+        SenalLED_DW.is_c1_SenalLED = SenalLED_IN_Reposo;
+        SenalLED_B.V = 0.0;
+        SenalLED_B.O = SenalLED_B.UnitDelay1;
+        break;
+
+       case SenalLED_IN_Asigna_50:
+        SenalLED_DW.is_c1_SenalLED = SenalLED_IN_Reposo;
+        SenalLED_B.V = 0.0;
+        SenalLED_B.O = SenalLED_B.UnitDelay1;
+        break;
+
+       case SenalLED_IN_Asigna_75:
+        SenalLED_DW.is_c1_SenalLED = SenalLED_IN_Reposo;
+        SenalLED_B.V = 0.0;
+        SenalLED_B.O = SenalLED_B.UnitDelay1;
+        break;
+
+       case SenalLED_IN_Avanza:
+        switch (SenalLED_B.In1) {
+         case 2612U:
+          SenalLED_DW.is_c1_SenalLED = SenalLED_IN_Giro_Izq;
+          SenalLED_B.V = SenalLED_DW.velocidad / 2.0;
+          break;
+
+         case 2610U:
+          SenalLED_DW.is_c1_SenalLED = SenalLED_IN_Giro_Der;
+          SenalLED_B.V = SenalLED_DW.velocidad / 2.0;
+          break;
+
+         case 2608U:
+          SenalLED_DW.is_c1_SenalLED = SenalLED_IN_Reposo;
+          SenalLED_B.V = 0.0;
+          SenalLED_B.O = SenalLED_B.UnitDelay1;
+          break;
+        }
+        break;
+
+       case SenalLED_IN_Giro_Der:
+        if (SenalLED_B.In1 == 2608U) {
+          SenalLED_DW.is_c1_SenalLED = SenalLED_IN_Reposo;
+          SenalLED_B.V = 0.0;
+          SenalLED_B.O = SenalLED_B.UnitDelay1;
+        } else {
+          SenalLED_B.V = SenalLED_DW.velocidad / 2.0;
+          SenalLED_B.O = SenalLED_B.UnitDelay1 + 0.52359877559829882;
+        }
+        break;
+
+       case SenalLED_IN_Giro_Izq:
+        if (SenalLED_B.In1 == 2608U) {
+          SenalLED_DW.is_c1_SenalLED = SenalLED_IN_Reposo;
+          SenalLED_B.V = 0.0;
+          SenalLED_B.O = SenalLED_B.UnitDelay1;
+        } else {
+          SenalLED_B.V = SenalLED_DW.velocidad / 2.0;
+          SenalLED_B.O = SenalLED_B.UnitDelay1 - 0.52359877559829882;
+        }
+        break;
+
+       default:
+        /* case IN_Reposo: */
+        switch (SenalLED_B.In1) {
+         case 2613U:
+          SenalLED_DW.is_c1_SenalLED = SenalLED_IN_Asigna_25;
+          SenalLED_DW.velocidad = 0.1;
+          break;
+
+         case 2614U:
+          SenalLED_DW.is_c1_SenalLED = SenalLED_IN_Asigna_50;
+          SenalLED_DW.velocidad = 0.2;
+          break;
+
+         case 2615U:
+          SenalLED_DW.is_c1_SenalLED = SenalLED_IN_Asigna_75;
+          SenalLED_DW.velocidad = 0.3;
+          break;
+
+         case 2609U:
+          SenalLED_DW.is_c1_SenalLED = SenalLED_IN_Avanza;
+          SenalLED_B.V = SenalLED_DW.velocidad;
+          SenalLED_B.O = SenalLED_B.UnitDelay1;
+          break;
+
+         case 2612U:
+          SenalLED_DW.is_c1_SenalLED = SenalLED_IN_Giro_Izq;
+          SenalLED_B.V = SenalLED_DW.velocidad / 2.0;
+          break;
+
+         case 2610U:
+          SenalLED_DW.is_c1_SenalLED = SenalLED_IN_Giro_Der;
+          SenalLED_B.V = SenalLED_DW.velocidad / 2.0;
+          break;
+        }
+        break;
+      }
+    }
+
+    /* End of Chart: '<Root>/Chart1' */
   }
 
   if (SenalLED_M->Timing.TaskCounters.TID[2] == 0) {
@@ -211,107 +409,23 @@ void SenalLED_step(void)
   }
 
   if (SenalLED_M->Timing.TaskCounters.TID[1] == 0) {
-    /* Chart: '<Root>/Chart' */
-    if (SenalLED_DW.is_active_c3_SenalLED == 0U) {
-      SenalLED_DW.is_active_c3_SenalLED = 1U;
-      SenalLED_DW.is_c3_SenalLED = SenalLED_IN_Normal;
-      SenalLED_B.V = SenalLED_B.UnitDelay;
-      SenalLED_B.O = SenalLED_B.UnitDelay1;
-    } else {
-      switch (SenalLED_DW.is_c3_SenalLED) {
-       case SenalLED_IN_Aumento_Vel:
-        if (SenalLED_B.In1 == 2608U) {
-          SenalLED_DW.is_c3_SenalLED = SenalLED_IN_Normal;
-          SenalLED_B.V = SenalLED_B.UnitDelay;
-          SenalLED_B.O = SenalLED_B.UnitDelay1;
-        } else {
-          SenalLED_B.V = SenalLED_B.UnitDelay + 0.05;
-          SenalLED_B.O = SenalLED_B.UnitDelay1;
-        }
-        break;
+  }
 
-       case SenalLED_IN_Decrementa_Vel:
-        if (SenalLED_B.In1 == 2608U) {
-          SenalLED_DW.is_c3_SenalLED = SenalLED_IN_Normal;
-          SenalLED_B.V = SenalLED_B.UnitDelay;
-          SenalLED_B.O = SenalLED_B.UnitDelay1;
-        } else {
-          SenalLED_B.V = SenalLED_B.UnitDelay - 0.05;
-          SenalLED_B.O = SenalLED_B.UnitDelay1;
-        }
-        break;
+  if (SenalLED_M->Timing.TaskCounters.TID[2] == 0) {
+  }
 
-       case SenalLED_IN_Giro_Derecha:
-        if (SenalLED_B.In1 == 2608U) {
-          SenalLED_DW.is_c3_SenalLED = SenalLED_IN_Normal;
-          SenalLED_B.V = SenalLED_B.UnitDelay;
-          SenalLED_B.O = SenalLED_B.UnitDelay1;
-        } else {
-          SenalLED_B.V = SenalLED_B.UnitDelay;
-          SenalLED_B.O = SenalLED_B.UnitDelay1 - 0.52359877559829882;
-        }
-        break;
-
-       case SenalLED_IN_Giro_Izq:
-        if (SenalLED_B.In1 == 2608U) {
-          SenalLED_DW.is_c3_SenalLED = SenalLED_IN_Normal;
-          SenalLED_B.V = SenalLED_B.UnitDelay;
-          SenalLED_B.O = SenalLED_B.UnitDelay1;
-        } else {
-          SenalLED_B.V = SenalLED_B.UnitDelay;
-          SenalLED_B.O = SenalLED_B.UnitDelay1 + 0.52359877559829882;
-        }
-        break;
-
-       default:
-        /* case IN_Normal: */
-        switch (SenalLED_B.In1) {
-         case 2611U:
-          SenalLED_DW.is_c3_SenalLED = SenalLED_IN_Decrementa_Vel;
-          SenalLED_B.V = SenalLED_B.UnitDelay - 0.05;
-          SenalLED_B.O = SenalLED_B.UnitDelay1;
-          break;
-
-         case 2610U:
-          SenalLED_DW.is_c3_SenalLED = SenalLED_IN_Giro_Derecha;
-          SenalLED_B.V = SenalLED_B.UnitDelay;
-          SenalLED_B.O = SenalLED_B.UnitDelay1 - 0.52359877559829882;
-          break;
-
-         case 2612U:
-          SenalLED_DW.is_c3_SenalLED = SenalLED_IN_Giro_Izq;
-          SenalLED_B.V = SenalLED_B.UnitDelay;
-          SenalLED_B.O = SenalLED_B.UnitDelay1 + 0.52359877559829882;
-          break;
-
-         case 2609U:
-          SenalLED_DW.is_c3_SenalLED = SenalLED_IN_Aumento_Vel;
-          SenalLED_B.V = SenalLED_B.UnitDelay + 0.05;
-          SenalLED_B.O = SenalLED_B.UnitDelay1;
-          break;
-
-         default:
-          SenalLED_B.V = SenalLED_B.UnitDelay;
-          SenalLED_B.O = SenalLED_B.UnitDelay1;
-          break;
-        }
-        break;
-      }
-    }
-
-    /* End of Chart: '<Root>/Chart' */
-
+  if (SenalLED_M->Timing.TaskCounters.TID[1] == 0) {
     /* Sum: '<Root>/Sum' */
-    SenalLED_B.O -= SenalLED_B.IntegradorDiscreto[2];
+    SenalLED_B.Saturation_m = SenalLED_B.O - SenalLED_B.IntegradorDiscreto[2];
 
     /* Gain: '<S34>/Integral Gain' */
-    rtb_IntegralGain = SenalLED_P.PIDController_I * SenalLED_B.O;
+    rtb_IntegralGain = SenalLED_P.PIDController_I * SenalLED_B.Saturation_m;
 
     /* Sum: '<S46>/Sum' incorporates:
      *  DiscreteIntegrator: '<S37>/Integrator'
      *  Gain: '<S42>/Proportional Gain'
      */
-    Sum_idx_1 = SenalLED_P.PIDController_P * SenalLED_B.O +
+    Sum_idx_1 = SenalLED_P.PIDController_P * SenalLED_B.Saturation_m +
       SenalLED_DW.Integrator_DSTATE;
 
     /* Saturate: '<S44>/Saturation' */
@@ -339,7 +453,8 @@ void SenalLED_step(void)
   /* Sum: '<S54>/Sum' incorporates:
    *  Memory: '<S54>/Memory'
    */
-  SenalLED_B.O = SenalLED_B.MatrixMultiply[0] - SenalLED_B.EnvironmentSwitch[0];
+  SenalLED_B.Saturation_m = SenalLED_B.MatrixMultiply[0] -
+    SenalLED_B.EnvironmentSwitch[0];
   Sum_idx_1 = SenalLED_B.MatrixMultiply[1] - SenalLED_B.EnvironmentSwitch[1];
   if (SenalLED_M->Timing.TaskCounters.TID[3] == 0) {
     /* Gain: '<S90>/Integral Gain' */
@@ -373,13 +488,14 @@ void SenalLED_step(void)
       (int16_T)(uint16_T)Sum_idx_1;
 
     /* Gain: '<S138>/Integral Gain' */
-    SenalLED_B.IntegralGain_a = SenalLED_P.PIDIzquerdo_I * SenalLED_B.O;
+    SenalLED_B.IntegralGain_a = SenalLED_P.PIDIzquerdo_I *
+      SenalLED_B.Saturation_m;
 
     /* Sum: '<S150>/Sum' incorporates:
      *  DiscreteIntegrator: '<S141>/Integrator'
      *  Gain: '<S146>/Proportional Gain'
      */
-    Sum_idx_1 = SenalLED_P.PIDIzquerdo_P * SenalLED_B.O +
+    Sum_idx_1 = SenalLED_P.PIDIzquerdo_P * SenalLED_B.Saturation_m +
       SenalLED_DW.Integrator_DSTATE_h;
 
     /* Saturate: '<S148>/Saturation' */
@@ -458,73 +574,37 @@ void SenalLED_step(void)
     }
 
     /* End of Switch: '<S158>/Environment Switch' */
-
-    /* MATLABSystem: '<S162>/Digital Output' incorporates:
+    /* RelationalOperator: '<S164>/Compare' incorporates:
      *  Constant: '<S164>/Constant'
-     *  RelationalOperator: '<S164>/Compare'
      */
-    writeDigitalPin(10, (uint8_T)(SenalLED_B.Saturation !=
-      SenalLED_P.CompareToConstant1_const));
+    SenalLED_B.Compare = (SenalLED_B.Saturation !=
+                          SenalLED_P.CompareToConstant1_const);
 
-    /* MATLABSystem: '<S162>/Digital Output1' incorporates:
+    /* MATLABSystem: '<S162>/Digital Output' */
+    writeDigitalPin(10, (uint8_T)SenalLED_B.Compare);
+
+    /* RelationalOperator: '<S163>/Compare' incorporates:
      *  Constant: '<S163>/Constant'
-     *  RelationalOperator: '<S163>/Compare'
      */
-    writeDigitalPin(5, (uint8_T)(SenalLED_B.Saturation_n !=
-      SenalLED_P.CompareToConstant_const));
+    SenalLED_B.Compare_a = (SenalLED_B.Saturation_n !=
+      SenalLED_P.CompareToConstant_const);
 
-    /* MATLABSystem: '<S162>/Drch_Adelante' */
-    obj = &SenalLED_DW.obj_f;
-    obj->MW_PWM_HANDLE = MW_PWM_GetHandle(SenalLED_DW.obj_f.PinPWM);
+    /* MATLABSystem: '<S162>/Digital Output1' */
+    writeDigitalPin(5, (uint8_T)SenalLED_B.Compare_a);
 
-    /* Saturate: '<S162>/Saturation2' */
-    if (SenalLED_B.Saturation > SenalLED_P.Saturation2_UpperSat) {
-      y = SenalLED_P.Saturation2_UpperSat;
-    } else if (SenalLED_B.Saturation < SenalLED_P.Saturation2_LowerSat) {
-      y = SenalLED_P.Saturation2_LowerSat;
+    /* Saturate: '<S162>/Saturation' */
+    if (SenalLED_B.Saturation_n > SenalLED_P.Saturation_UpperSat) {
+      /* Saturate: '<S162>/Saturation' */
+      SenalLED_B.Saturation_c = SenalLED_P.Saturation_UpperSat;
+    } else if (SenalLED_B.Saturation_n < SenalLED_P.Saturation_LowerSat) {
+      /* Saturate: '<S162>/Saturation' */
+      SenalLED_B.Saturation_c = SenalLED_P.Saturation_LowerSat;
     } else {
-      y = SenalLED_B.Saturation;
+      /* Saturate: '<S162>/Saturation' */
+      SenalLED_B.Saturation_c = SenalLED_B.Saturation_n;
     }
 
-    /* End of Saturate: '<S162>/Saturation2' */
-
-    /* MATLABSystem: '<S162>/Drch_Adelante' */
-    if (y < 255.0) {
-      SenalLED_B.O = y;
-    } else {
-      SenalLED_B.O = 255.0;
-    }
-
-    if (!(SenalLED_B.O > 0.0)) {
-      SenalLED_B.O = 0.0;
-    }
-
-    MW_PWM_SetDutyCycle(SenalLED_DW.obj_f.MW_PWM_HANDLE, SenalLED_B.O);
-
-    /* MATLABSystem: '<S162>/Drch_Atras' */
-    obj = &SenalLED_DW.obj_jg;
-    obj->MW_PWM_HANDLE = MW_PWM_GetHandle(SenalLED_DW.obj_jg.PinPWM);
-
-    /* Saturate: '<S162>/Saturation3' */
-    if (SenalLED_B.Saturation > SenalLED_P.Saturation3_UpperSat) {
-      y = SenalLED_P.Saturation3_UpperSat;
-    } else if (SenalLED_B.Saturation < SenalLED_P.Saturation3_LowerSat) {
-      y = SenalLED_P.Saturation3_LowerSat;
-    } else {
-      y = SenalLED_B.Saturation;
-    }
-
-    /* End of Saturate: '<S162>/Saturation3' */
-
-    /* MATLABSystem: '<S162>/Drch_Atras' incorporates:
-     *  Gain: '<S162>/Gain1'
-     */
-    MW_PWM_SetDutyCycle(SenalLED_DW.obj_jg.MW_PWM_HANDLE, (real_T)(uint8_T)
-                        (((int32_T)SenalLED_P.Gain1_Gain * y) >> 15));
-
-    /* MATLABSystem: '<S162>/Izq_Adelante' */
-    obj = &SenalLED_DW.obj_b;
-    obj->MW_PWM_HANDLE = MW_PWM_GetHandle(SenalLED_DW.obj_b.PinPWM);
+    /* End of Saturate: '<S162>/Saturation' */
 
     /* Saturate: '<S162>/Saturation4' */
     if (SenalLED_B.Saturation_n > SenalLED_P.Saturation4_UpperSat) {
@@ -539,52 +619,99 @@ void SenalLED_step(void)
 
     /* Abs: '<S162>/Abs1' */
     if (y < 0) {
-      y = -y;
+      /* Abs: '<S162>/Abs1' */
+      SenalLED_B.Abs1 = -y;
+    } else {
+      /* Abs: '<S162>/Abs1' */
+      SenalLED_B.Abs1 = y;
     }
 
     /* End of Abs: '<S162>/Abs1' */
 
-    /* MATLABSystem: '<S162>/Izq_Adelante' */
-    if (y < 255.0) {
-      SenalLED_B.O = y;
+    /* Saturate: '<S162>/Saturation3' */
+    if (SenalLED_B.Saturation > SenalLED_P.Saturation3_UpperSat) {
+      y = SenalLED_P.Saturation3_UpperSat;
+    } else if (SenalLED_B.Saturation < SenalLED_P.Saturation3_LowerSat) {
+      y = SenalLED_P.Saturation3_LowerSat;
     } else {
-      SenalLED_B.O = 255.0;
+      y = SenalLED_B.Saturation;
     }
 
-    if (!(SenalLED_B.O > 0.0)) {
-      SenalLED_B.O = 0.0;
+    /* End of Saturate: '<S162>/Saturation3' */
+
+    /* Gain: '<S162>/Gain1' */
+    SenalLED_B.Gain1 = (uint8_T)(((int32_T)SenalLED_P.Gain1_Gain * y) >> 15);
+
+    /* Saturate: '<S162>/Saturation2' */
+    if (SenalLED_B.Saturation > SenalLED_P.Saturation2_UpperSat) {
+      /* Saturate: '<S162>/Saturation2' */
+      SenalLED_B.Saturation2 = SenalLED_P.Saturation2_UpperSat;
+    } else if (SenalLED_B.Saturation < SenalLED_P.Saturation2_LowerSat) {
+      /* Saturate: '<S162>/Saturation2' */
+      SenalLED_B.Saturation2 = SenalLED_P.Saturation2_LowerSat;
+    } else {
+      /* Saturate: '<S162>/Saturation2' */
+      SenalLED_B.Saturation2 = SenalLED_B.Saturation;
     }
 
-    MW_PWM_SetDutyCycle(SenalLED_DW.obj_b.MW_PWM_HANDLE, SenalLED_B.O);
+    /* End of Saturate: '<S162>/Saturation2' */
+
+    /* MATLABSystem: '<S162>/Drch_Adelante' */
+    obj = &SenalLED_DW.obj_f;
+    obj->MW_PWM_HANDLE = MW_PWM_GetHandle(SenalLED_DW.obj_f.PinPWM);
+    if (SenalLED_B.Saturation2 < 255.0) {
+      SenalLED_B.Saturation_m = SenalLED_B.Saturation2;
+    } else {
+      SenalLED_B.Saturation_m = 255.0;
+    }
+
+    if (!(SenalLED_B.Saturation_m > 0.0)) {
+      SenalLED_B.Saturation_m = 0.0;
+    }
+
+    MW_PWM_SetDutyCycle(SenalLED_DW.obj_f.MW_PWM_HANDLE, SenalLED_B.Saturation_m);
+
+    /* End of MATLABSystem: '<S162>/Drch_Adelante' */
+
+    /* MATLABSystem: '<S162>/Drch_Atras' */
+    obj = &SenalLED_DW.obj_jg;
+    obj->MW_PWM_HANDLE = MW_PWM_GetHandle(SenalLED_DW.obj_jg.PinPWM);
+    MW_PWM_SetDutyCycle(SenalLED_DW.obj_jg.MW_PWM_HANDLE, (real_T)
+                        SenalLED_B.Gain1);
+
+    /* MATLABSystem: '<S162>/Izq_Adelante' */
+    obj = &SenalLED_DW.obj_b;
+    obj->MW_PWM_HANDLE = MW_PWM_GetHandle(SenalLED_DW.obj_b.PinPWM);
+    if (SenalLED_B.Abs1 < 255.0) {
+      SenalLED_B.Saturation_m = SenalLED_B.Abs1;
+    } else {
+      SenalLED_B.Saturation_m = 255.0;
+    }
+
+    if (!(SenalLED_B.Saturation_m > 0.0)) {
+      SenalLED_B.Saturation_m = 0.0;
+    }
+
+    MW_PWM_SetDutyCycle(SenalLED_DW.obj_b.MW_PWM_HANDLE, SenalLED_B.Saturation_m);
+
+    /* End of MATLABSystem: '<S162>/Izq_Adelante' */
 
     /* MATLABSystem: '<S162>/Izq_Atras' */
     obj = &SenalLED_DW.obj_j;
     obj->MW_PWM_HANDLE = MW_PWM_GetHandle(SenalLED_DW.obj_j.PinPWM);
-
-    /* Saturate: '<S162>/Saturation' */
-    if (SenalLED_B.Saturation_n > SenalLED_P.Saturation_UpperSat) {
-      y = SenalLED_P.Saturation_UpperSat;
-    } else if (SenalLED_B.Saturation_n < SenalLED_P.Saturation_LowerSat) {
-      y = SenalLED_P.Saturation_LowerSat;
+    if (SenalLED_B.Saturation_c < 255.0) {
+      SenalLED_B.Saturation_m = SenalLED_B.Saturation_c;
     } else {
-      y = SenalLED_B.Saturation_n;
+      SenalLED_B.Saturation_m = 255.0;
     }
 
-    /* End of Saturate: '<S162>/Saturation' */
-
-    /* MATLABSystem: '<S162>/Izq_Atras' */
-    if (y < 255.0) {
-      SenalLED_B.O = y;
-    } else {
-      SenalLED_B.O = 255.0;
+    if (!(SenalLED_B.Saturation_m > 0.0)) {
+      SenalLED_B.Saturation_m = 0.0;
     }
 
-    if (!(SenalLED_B.O > 0.0)) {
-      SenalLED_B.O = 0.0;
-    }
+    MW_PWM_SetDutyCycle(SenalLED_DW.obj_j.MW_PWM_HANDLE, SenalLED_B.Saturation_m);
 
-    MW_PWM_SetDutyCycle(SenalLED_DW.obj_j.MW_PWM_HANDLE, SenalLED_B.O);
-
+    /* End of MATLABSystem: '<S162>/Izq_Atras' */
     /* Product: '<S55>/Matrix Multiply' incorporates:
      *  Constant: '<S55>/Constant'
      *  Switch: '<S158>/Environment Switch'
@@ -620,71 +747,7 @@ void SenalLED_step(void)
     SenalLED_B.Product1 = SenalLED_B.MatrixMultiply_p[0] * SenalLED_B.Cos;
   }
 
-  if (SenalLED_M->Timing.TaskCounters.TID[6] == 0) {
-    /* DiscretePulseGenerator: '<S2>/Pulse Generator' */
-    SenalLED_B.PulseGenerator = (SenalLED_DW.clockTickCounter <
-      SenalLED_P.PulseGenerator_Duty) && (SenalLED_DW.clockTickCounter >= 0L) ?
-      SenalLED_P.PulseGenerator_Amp : 0.0;
-
-    /* DiscretePulseGenerator: '<S2>/Pulse Generator' */
-    if (SenalLED_DW.clockTickCounter >= SenalLED_P.PulseGenerator_Period - 1.0)
-    {
-      SenalLED_DW.clockTickCounter = 0L;
-    } else {
-      SenalLED_DW.clockTickCounter++;
-    }
-  }
-
-  if (SenalLED_M->Timing.TaskCounters.TID[5] == 0) {
-    /* S-Function (scominttobit): '<S2>/Integer to Bit Converter' incorporates:
-     *  DataStoreRead: '<S2>/Data Store Read'
-     */
-    /* Integer to Bit Conversion */
-    b_dataOut = SenalLED_DW.senal >> 1;
-    status = (uint8_T)((int16_T)b_dataOut & 1);
-    b_dataOut >>= 1;
-    rtb_IntegertoBitConverter_idx_1 = (uint8_T)((int16_T)b_dataOut & 1);
-    b_dataOut >>= 1;
-
-    /* Logic: '<S2>/Logical Operator4' incorporates:
-     *  Logic: '<S2>/Logical Operator3'
-     *  S-Function (scominttobit): '<S2>/Integer to Bit Converter'
-     */
-    rtb_LogicalOperator4 = ((SenalLED_B.PulseGenerator != 0.0) || ((uint8_T)
-      ((int16_T)b_dataOut & 1) == 0));
-
-    /* MATLABSystem: '<S2>/BLUE' incorporates:
-     *  DataStoreRead: '<S2>/Data Store Read'
-     *  Logic: '<S2>/Logical Operator2'
-     *  S-Function (scominttobit): '<S2>/Integer to Bit Converter'
-     */
-    writeDigitalPin(49, (uint8_T)(rtb_LogicalOperator4 && ((uint8_T)((int16_T)
-      SenalLED_DW.senal & 1) != 0)));
-
-    /* MATLABSystem: '<S2>/GREEN' incorporates:
-     *  Logic: '<S2>/Logical Operator'
-     */
-    writeDigitalPin(53, (uint8_T)(rtb_LogicalOperator4 &&
-      (rtb_IntegertoBitConverter_idx_1 != 0)));
-
-    /* MATLABSystem: '<S2>/RED' incorporates:
-     *  Logic: '<S2>/Logical Operator1'
-     */
-    writeDigitalPin(51, (uint8_T)(rtb_LogicalOperator4 && (status != 0)));
-  }
-
-  if (SenalLED_M->Timing.TaskCounters.TID[4] == 0) {
-    /* S-Function (saeroclockpacer): '<S2>/Simulation Pace' */
-    /*
-     * The Clock Pacer generates no code, it is only active in
-     * interpreted simulation.
-     */
-  }
-
   if (SenalLED_M->Timing.TaskCounters.TID[3] == 0) {
-    /* Update for UnitDelay: '<Root>/Unit Delay' */
-    SenalLED_DW.UnitDelay_DSTATE = SenalLED_B.V;
-
     /* Update for UnitDelay: '<Root>/Unit Delay1' */
     SenalLED_DW.UnitDelay1_DSTATE = SenalLED_B.IntegradorDiscreto[2];
   }
@@ -692,12 +755,13 @@ void SenalLED_step(void)
   if (SenalLED_M->Timing.TaskCounters.TID[2] == 0) {
     /* Update for DiscreteIntegrator: '<S57>/Integrador Discreto' */
     Sum_idx_1 = SenalLED_DW.IntegradorDiscreto_DSTATE[0];
-    SenalLED_B.O = SenalLED_DW.IntegradorDiscreto_DSTATE[1];
+    SenalLED_B.Saturation_m = SenalLED_DW.IntegradorDiscreto_DSTATE[1];
     tmp = SenalLED_DW.IntegradorDiscreto_DSTATE[2];
     SenalLED_DW.IntegradorDiscreto_DSTATE[0] =
       SenalLED_P.IntegradorDiscreto_gainval * SenalLED_B.Product1 + Sum_idx_1;
     SenalLED_DW.IntegradorDiscreto_DSTATE[1] =
-      SenalLED_P.IntegradorDiscreto_gainval * SenalLED_B.Product + SenalLED_B.O;
+      SenalLED_P.IntegradorDiscreto_gainval * SenalLED_B.Product +
+      SenalLED_B.Saturation_m;
     SenalLED_DW.IntegradorDiscreto_DSTATE[2] =
       SenalLED_P.IntegradorDiscreto_gainval * SenalLED_B.MatrixMultiply_p[1] +
       tmp;
@@ -761,6 +825,120 @@ void SenalLED_step(void)
     SenalLED_DW.UD_DSTATE[1] = rtb_TSamp_idx_1;
   }
 
+  /* External mode */
+  rtExtModeUploadCheckTrigger(7);
+
+  {                            /* Sample time: [0.0016666666666666668s, 0.0s] */
+    rtExtModeUpload(0, (real_T)SenalLED_M->Timing.taskTime0);
+  }
+
+  if (SenalLED_M->Timing.TaskCounters.TID[1] == 0) {/* Sample time: [0.005s, 0.0s] */
+    rtExtModeUpload(1, (real_T)((SenalLED_M->Timing.clockTick1) * 0.005));
+  }
+
+  if (SenalLED_M->Timing.TaskCounters.TID[2] == 0) {/* Sample time: [0.01s, 0.0s] */
+    rtExtModeUpload(2, (real_T)((SenalLED_M->Timing.clockTick2) * 0.01));
+  }
+
+  if (SenalLED_M->Timing.TaskCounters.TID[3] == 0) {/* Sample time: [0.015s, 0.0s] */
+    rtExtModeUpload(3, (real_T)((SenalLED_M->Timing.clockTick3) * 0.015));
+  }
+
+  if (SenalLED_M->Timing.TaskCounters.TID[4] == 0) {
+                                /* Sample time: [0.033333333333333333s, 0.0s] */
+    rtExtModeUpload(4, (real_T)((SenalLED_M->Timing.clockTick4) *
+      0.033333333333333333));
+  }
+
+  if (SenalLED_M->Timing.TaskCounters.TID[5] == 0) {/* Sample time: [0.1s, 0.0s] */
+    rtExtModeUpload(5, (real_T)((SenalLED_M->Timing.clockTick5) * 0.1));
+  }
+
+  if (SenalLED_M->Timing.TaskCounters.TID[6] == 0) {/* Sample time: [0.4s, 0.0s] */
+    rtExtModeUpload(6, (real_T)((SenalLED_M->Timing.clockTick6) * 0.4));
+  }
+
+  /* signal main to stop simulation */
+  {                            /* Sample time: [0.0016666666666666668s, 0.0s] */
+    if ((rtmGetTFinal(SenalLED_M)!=-1) &&
+        !((rtmGetTFinal(SenalLED_M)-SenalLED_M->Timing.taskTime0) >
+          SenalLED_M->Timing.taskTime0 * (DBL_EPSILON))) {
+      rtmSetErrorStatus(SenalLED_M, "Simulation finished");
+    }
+
+    if (rtmGetStopRequested(SenalLED_M)) {
+      rtmSetErrorStatus(SenalLED_M, "Simulation finished");
+    }
+  }
+
+  /* Update absolute time for base rate */
+  /* The "clockTick0" counts the number of times the code of this task has
+   * been executed. The absolute time is the multiplication of "clockTick0"
+   * and "Timing.stepSize0". Size of "clockTick0" ensures timer will not
+   * overflow during the application lifespan selected.
+   */
+  SenalLED_M->Timing.taskTime0 =
+    ((time_T)(++SenalLED_M->Timing.clockTick0)) * SenalLED_M->Timing.stepSize0;
+  if (SenalLED_M->Timing.TaskCounters.TID[1] == 0) {
+    /* Update absolute timer for sample time: [0.005s, 0.0s] */
+    /* The "clockTick1" counts the number of times the code of this task has
+     * been executed. The resolution of this integer timer is 0.005, which is the step size
+     * of the task. Size of "clockTick1" ensures timer will not overflow during the
+     * application lifespan selected.
+     */
+    SenalLED_M->Timing.clockTick1++;
+  }
+
+  if (SenalLED_M->Timing.TaskCounters.TID[2] == 0) {
+    /* Update absolute timer for sample time: [0.01s, 0.0s] */
+    /* The "clockTick2" counts the number of times the code of this task has
+     * been executed. The resolution of this integer timer is 0.01, which is the step size
+     * of the task. Size of "clockTick2" ensures timer will not overflow during the
+     * application lifespan selected.
+     */
+    SenalLED_M->Timing.clockTick2++;
+  }
+
+  if (SenalLED_M->Timing.TaskCounters.TID[3] == 0) {
+    /* Update absolute timer for sample time: [0.015s, 0.0s] */
+    /* The "clockTick3" counts the number of times the code of this task has
+     * been executed. The resolution of this integer timer is 0.015, which is the step size
+     * of the task. Size of "clockTick3" ensures timer will not overflow during the
+     * application lifespan selected.
+     */
+    SenalLED_M->Timing.clockTick3++;
+  }
+
+  if (SenalLED_M->Timing.TaskCounters.TID[4] == 0) {
+    /* Update absolute timer for sample time: [0.033333333333333333s, 0.0s] */
+    /* The "clockTick4" counts the number of times the code of this task has
+     * been executed. The resolution of this integer timer is 0.033333333333333333, which is the step size
+     * of the task. Size of "clockTick4" ensures timer will not overflow during the
+     * application lifespan selected.
+     */
+    SenalLED_M->Timing.clockTick4++;
+  }
+
+  if (SenalLED_M->Timing.TaskCounters.TID[5] == 0) {
+    /* Update absolute timer for sample time: [0.1s, 0.0s] */
+    /* The "clockTick5" counts the number of times the code of this task has
+     * been executed. The resolution of this integer timer is 0.1, which is the step size
+     * of the task. Size of "clockTick5" ensures timer will not overflow during the
+     * application lifespan selected.
+     */
+    SenalLED_M->Timing.clockTick5++;
+  }
+
+  if (SenalLED_M->Timing.TaskCounters.TID[6] == 0) {
+    /* Update absolute timer for sample time: [0.4s, 0.0s] */
+    /* The "clockTick6" counts the number of times the code of this task has
+     * been executed. The resolution of this integer timer is 0.4, which is the step size
+     * of the task. Size of "clockTick6" ensures timer will not overflow during the
+     * application lifespan selected.
+     */
+    SenalLED_M->Timing.clockTick6++;
+  }
+
   rate_scheduler();
 }
 
@@ -775,6 +953,41 @@ void SenalLED_initialize(void)
   /* initialize real-time model */
   (void) memset((void *)SenalLED_M, 0,
                 sizeof(RT_MODEL_SenalLED_T));
+  rtmSetTFinal(SenalLED_M, -1);
+  SenalLED_M->Timing.stepSize0 = 0.0016666666666666668;
+
+  /* External mode info */
+  SenalLED_M->Sizes.checksums[0] = (2265565125U);
+  SenalLED_M->Sizes.checksums[1] = (2060309963U);
+  SenalLED_M->Sizes.checksums[2] = (2960468323U);
+  SenalLED_M->Sizes.checksums[3] = (360253818U);
+
+  {
+    static const sysRanDType rtAlwaysEnabled = SUBSYS_RAN_BC_ENABLE;
+    static RTWExtModeInfo rt_ExtModeInfo;
+    static const sysRanDType *systemRan[15];
+    SenalLED_M->extModeInfo = (&rt_ExtModeInfo);
+    rteiSetSubSystemActiveVectorAddresses(&rt_ExtModeInfo, systemRan);
+    systemRan[0] = &rtAlwaysEnabled;
+    systemRan[1] = &rtAlwaysEnabled;
+    systemRan[2] = &rtAlwaysEnabled;
+    systemRan[3] = &rtAlwaysEnabled;
+    systemRan[4] = &rtAlwaysEnabled;
+    systemRan[5] = &rtAlwaysEnabled;
+    systemRan[6] = (sysRanDType *)&SenalLED_DW.Subsystem_SubsysRanBC;
+    systemRan[7] = &rtAlwaysEnabled;
+    systemRan[8] = &rtAlwaysEnabled;
+    systemRan[9] = &rtAlwaysEnabled;
+    systemRan[10] = &rtAlwaysEnabled;
+    systemRan[11] = &rtAlwaysEnabled;
+    systemRan[12] = &rtAlwaysEnabled;
+    systemRan[13] = &rtAlwaysEnabled;
+    systemRan[14] = &rtAlwaysEnabled;
+    rteiSetModelMappingInfoPtr(SenalLED_M->extModeInfo,
+      &SenalLED_M->SpecialInfo.mappingInfo);
+    rteiSetChecksumsPtr(SenalLED_M->extModeInfo, SenalLED_M->Sizes.checksums);
+    rteiSetTPtr(SenalLED_M->extModeInfo, rtmGetTPtr(SenalLED_M));
+  }
 
   /* block I/O */
   (void) memset(((void *) &SenalLED_B), 0,
@@ -792,9 +1005,6 @@ void SenalLED_initialize(void)
 
     /* Start for DataStoreMemory: '<Root>/Data Store Memory' */
     SenalLED_DW.senal = SenalLED_P.DataStoreMemory_InitialValue;
-
-    /* InitializeConditions for UnitDelay: '<Root>/Unit Delay' */
-    SenalLED_DW.UnitDelay_DSTATE = SenalLED_P.UnitDelay_InitialCondition;
 
     /* InitializeConditions for UnitDelay: '<Root>/Unit Delay1' */
     SenalLED_DW.UnitDelay1_DSTATE = SenalLED_P.UnitDelay1_InitialCondition;
@@ -866,9 +1076,9 @@ void SenalLED_initialize(void)
 
     /* End of SystemInitialize for SubSystem: '<Root>/Subsystem' */
 
-    /* SystemInitialize for Chart: '<Root>/Chart' */
-    SenalLED_DW.is_active_c3_SenalLED = 0U;
-    SenalLED_DW.is_c3_SenalLED = SenalLED_IN_NO_ACTIVE_CHILD;
+    /* SystemInitialize for Chart: '<Root>/Chart1' */
+    SenalLED_DW.is_active_c1_SenalLED = 0U;
+    SenalLED_DW.is_c1_SenalLED = 0UL;
 
     /* Start for MATLABSystem: '<Root>/Serial Receive' */
     SenalLED_DW.obj.matlabCodegenIsDeleted = false;
@@ -878,6 +1088,24 @@ void SenalLED_initialize(void)
     SenalLED_DW.obj.DataSizeInBytes = SenalLED_DW.obj.DataTypeWidth;
     MW_SCI_Open(3);
     SenalLED_DW.obj.isSetupComplete = true;
+
+    /* Start for MATLABSystem: '<S2>/BLUE' */
+    SenalLED_DW.obj_h.matlabCodegenIsDeleted = false;
+    SenalLED_DW.obj_h.isInitialized = 1L;
+    digitalIOSetup(49, 1);
+    SenalLED_DW.obj_h.isSetupComplete = true;
+
+    /* Start for MATLABSystem: '<S2>/GREEN' */
+    SenalLED_DW.obj_g.matlabCodegenIsDeleted = false;
+    SenalLED_DW.obj_g.isInitialized = 1L;
+    digitalIOSetup(53, 1);
+    SenalLED_DW.obj_g.isSetupComplete = true;
+
+    /* Start for MATLABSystem: '<S2>/RED' */
+    SenalLED_DW.obj_p.matlabCodegenIsDeleted = false;
+    SenalLED_DW.obj_p.isInitialized = 1L;
+    digitalIOSetup(51, 1);
+    SenalLED_DW.obj_p.isSetupComplete = true;
 
     /* Start for MATLABSystem: '<S162>/Digital Output' */
     SenalLED_DW.obj_d.matlabCodegenIsDeleted = false;
@@ -942,24 +1170,6 @@ void SenalLED_initialize(void)
     obj->MW_PWM_HANDLE = MW_PWM_GetHandle(SenalLED_DW.obj_j.PinPWM);
     MW_PWM_Start(SenalLED_DW.obj_j.MW_PWM_HANDLE);
     SenalLED_DW.obj_j.isSetupComplete = true;
-
-    /* Start for MATLABSystem: '<S2>/BLUE' */
-    SenalLED_DW.obj_h.matlabCodegenIsDeleted = false;
-    SenalLED_DW.obj_h.isInitialized = 1L;
-    digitalIOSetup(49, 1);
-    SenalLED_DW.obj_h.isSetupComplete = true;
-
-    /* Start for MATLABSystem: '<S2>/GREEN' */
-    SenalLED_DW.obj_g.matlabCodegenIsDeleted = false;
-    SenalLED_DW.obj_g.isInitialized = 1L;
-    digitalIOSetup(53, 1);
-    SenalLED_DW.obj_g.isSetupComplete = true;
-
-    /* Start for MATLABSystem: '<S2>/RED' */
-    SenalLED_DW.obj_p.matlabCodegenIsDeleted = false;
-    SenalLED_DW.obj_p.isInitialized = 1L;
-    digitalIOSetup(51, 1);
-    SenalLED_DW.obj_p.isSetupComplete = true;
   }
 }
 
@@ -974,7 +1184,26 @@ void SenalLED_terminate(void)
   }
 
   /* End of Terminate for MATLABSystem: '<Root>/Serial Receive' */
+  /* Terminate for MATLABSystem: '<S2>/BLUE' */
+  if (!SenalLED_DW.obj_h.matlabCodegenIsDeleted) {
+    SenalLED_DW.obj_h.matlabCodegenIsDeleted = true;
+  }
 
+  /* End of Terminate for MATLABSystem: '<S2>/BLUE' */
+
+  /* Terminate for MATLABSystem: '<S2>/GREEN' */
+  if (!SenalLED_DW.obj_g.matlabCodegenIsDeleted) {
+    SenalLED_DW.obj_g.matlabCodegenIsDeleted = true;
+  }
+
+  /* End of Terminate for MATLABSystem: '<S2>/GREEN' */
+
+  /* Terminate for MATLABSystem: '<S2>/RED' */
+  if (!SenalLED_DW.obj_p.matlabCodegenIsDeleted) {
+    SenalLED_DW.obj_p.matlabCodegenIsDeleted = true;
+  }
+
+  /* End of Terminate for MATLABSystem: '<S2>/RED' */
   /* Terminate for MATLABSystem: '<S162>/Digital Output' */
   if (!SenalLED_DW.obj_d.matlabCodegenIsDeleted) {
     SenalLED_DW.obj_d.matlabCodegenIsDeleted = true;
@@ -1048,27 +1277,6 @@ void SenalLED_terminate(void)
   }
 
   /* End of Terminate for MATLABSystem: '<S162>/Izq_Atras' */
-
-  /* Terminate for MATLABSystem: '<S2>/BLUE' */
-  if (!SenalLED_DW.obj_h.matlabCodegenIsDeleted) {
-    SenalLED_DW.obj_h.matlabCodegenIsDeleted = true;
-  }
-
-  /* End of Terminate for MATLABSystem: '<S2>/BLUE' */
-
-  /* Terminate for MATLABSystem: '<S2>/GREEN' */
-  if (!SenalLED_DW.obj_g.matlabCodegenIsDeleted) {
-    SenalLED_DW.obj_g.matlabCodegenIsDeleted = true;
-  }
-
-  /* End of Terminate for MATLABSystem: '<S2>/GREEN' */
-
-  /* Terminate for MATLABSystem: '<S2>/RED' */
-  if (!SenalLED_DW.obj_p.matlabCodegenIsDeleted) {
-    SenalLED_DW.obj_p.matlabCodegenIsDeleted = true;
-  }
-
-  /* End of Terminate for MATLABSystem: '<S2>/RED' */
 }
 
 /*

@@ -2,16 +2,21 @@ ert_main.o: \
  C:/Users/Leonardo/Desktop/4_GIERM/Laboratorio_Robotica/Proyecto_Final/SenalLED_ert_rtw/ert_main.c \
  C:/Users/Leonardo/Desktop/4_GIERM/Laboratorio_Robotica/Proyecto_Final/SenalLED_ert_rtw/SenalLED.h \
  C:/Users/Leonardo/Desktop/4_GIERM/Laboratorio_Robotica/Proyecto_Final/SenalLED_ert_rtw/rtwtypes.h \
+ C:/PROGRA~1/MATLAB/R2020b/simulink/include/rtw_extmode.h \
+ C:/PROGRA~1/MATLAB/R2020b/simulink/include/sysran_types.h \
  C:/PROGRA~1/MATLAB/R2020b/simulink/include/rtw_continuous.h \
  C:/Users/Leonardo/Desktop/4_GIERM/Laboratorio_Robotica/Proyecto_Final/SenalLED_ert_rtw/rtwtypes.h \
  C:/PROGRA~1/MATLAB/R2020b/simulink/include/rtw_solver.h \
  C:/PROGRA~1/MATLAB/R2020b/simulink/include/rtw_continuous.h \
+ C:/PROGRA~1/MATLAB/R2020b/rtw/c/src/ext_mode/common/ext_work.h \
+ C:/PROGRA~1/MATLAB/R2020b/rtw/c/src/ext_mode/common/ext_types.h \
  C:/PROGRA~3/MATLAB/SUPPOR~1/R2020b/toolbox/target/SUPPOR~1/ARDUIN~2/include/MW_arduino_digitalio.h \
  C:/PROGRA~3/MATLAB/SUPPOR~1/R2020b/toolbox/target/SUPPOR~1/ARDUIN~2/include/MW_SerialRead.h \
  C:/PROGRA~3/MATLAB/SUPPOR~1/R2020b/toolbox/target/SUPPOR~1/ARDUIN~2/include/MW_SerialWrite.h \
  C:/PROGRA~3/MATLAB/SUPPOR~1/R2020b/toolbox/target/shared/svd/include/MW_PWM.h \
  C:/PROGRA~3/MATLAB/SUPPOR~1/R2020b/toolbox/target/shared/svd/include/MW_SVD.h \
  C:/Users/Leonardo/Desktop/4_GIERM/Laboratorio_Robotica/Proyecto_Final/SenalLED_ert_rtw/SenalLED_types.h \
+ C:/Users/Leonardo/Desktop/4_GIERM/Laboratorio_Robotica/Proyecto_Final/SenalLED_ert_rtw/multiword_types.h \
  C:/PROGRA~3/MATLAB/SUPPOR~1/R2020b/toolbox/target/shared/svd/include/MW_SVD.h \
  C:/Users/Leonardo/Desktop/4_GIERM/Laboratorio_Robotica/Proyecto_Final/SenalLED_ert_rtw/MW_target_hardware_resources.h \
  C:/PROGRA~3/MATLAB/SUPPOR~1/R2020b/toolbox/target/SUPPOR~1/ARDUIN~1/include/MW_ArduinoHWInit.h \
@@ -20,11 +25,19 @@ ert_main.o: \
  C:/ProgramData/MATLAB/SupportPackages/R2020b/3P.instrset/arduinoide.instrset/hardware/arduino/avr/cores/arduino/binary.h \
  C:/ProgramData/MATLAB/SupportPackages/R2020b/3P.instrset/arduinoide.instrset/hardware/arduino/avr/variants/mega/pins_arduino.h \
  C:/Users/Leonardo/Desktop/4_GIERM/Laboratorio_Robotica/Proyecto_Final/SenalLED_ert_rtw/rt_nonfinite.h \
- C:/Users/Leonardo/Desktop/4_GIERM/Laboratorio_Robotica/Proyecto_Final/SenalLED_ert_rtw/rtGetInf.h
+ C:/Users/Leonardo/Desktop/4_GIERM/Laboratorio_Robotica/Proyecto_Final/SenalLED_ert_rtw/rtGetInf.h \
+ C:/PROGRA~1/MATLAB/R2020b/toolbox/coder/xcp/src/target/slave/include/xcp.h \
+ C:/PROGRA~1/MATLAB/R2020b/toolbox/coder/xcp/src/target/slave/common/xcp_common.h \
+ C:/PROGRA~1/MATLAB/R2020b/toolbox/coder/xcp/src/target/slave/platform/include/xcp_platform.h \
+ C:/PROGRA~3/MATLAB/SUPPOR~1/R2020b/toolbox/target/SUPPOR~1/ARDUIN~1/include/xcp_platform_custom.h
 
 C:/Users/Leonardo/Desktop/4_GIERM/Laboratorio_Robotica/Proyecto_Final/SenalLED_ert_rtw/SenalLED.h:
 
 C:/Users/Leonardo/Desktop/4_GIERM/Laboratorio_Robotica/Proyecto_Final/SenalLED_ert_rtw/rtwtypes.h:
+
+C:/PROGRA~1/MATLAB/R2020b/simulink/include/rtw_extmode.h:
+
+C:/PROGRA~1/MATLAB/R2020b/simulink/include/sysran_types.h:
 
 C:/PROGRA~1/MATLAB/R2020b/simulink/include/rtw_continuous.h:
 
@@ -33,6 +46,10 @@ C:/Users/Leonardo/Desktop/4_GIERM/Laboratorio_Robotica/Proyecto_Final/SenalLED_e
 C:/PROGRA~1/MATLAB/R2020b/simulink/include/rtw_solver.h:
 
 C:/PROGRA~1/MATLAB/R2020b/simulink/include/rtw_continuous.h:
+
+C:/PROGRA~1/MATLAB/R2020b/rtw/c/src/ext_mode/common/ext_work.h:
+
+C:/PROGRA~1/MATLAB/R2020b/rtw/c/src/ext_mode/common/ext_types.h:
 
 C:/PROGRA~3/MATLAB/SUPPOR~1/R2020b/toolbox/target/SUPPOR~1/ARDUIN~2/include/MW_arduino_digitalio.h:
 
@@ -45,6 +62,8 @@ C:/PROGRA~3/MATLAB/SUPPOR~1/R2020b/toolbox/target/shared/svd/include/MW_PWM.h:
 C:/PROGRA~3/MATLAB/SUPPOR~1/R2020b/toolbox/target/shared/svd/include/MW_SVD.h:
 
 C:/Users/Leonardo/Desktop/4_GIERM/Laboratorio_Robotica/Proyecto_Final/SenalLED_ert_rtw/SenalLED_types.h:
+
+C:/Users/Leonardo/Desktop/4_GIERM/Laboratorio_Robotica/Proyecto_Final/SenalLED_ert_rtw/multiword_types.h:
 
 C:/PROGRA~3/MATLAB/SUPPOR~1/R2020b/toolbox/target/shared/svd/include/MW_SVD.h:
 
@@ -63,3 +82,11 @@ C:/ProgramData/MATLAB/SupportPackages/R2020b/3P.instrset/arduinoide.instrset/har
 C:/Users/Leonardo/Desktop/4_GIERM/Laboratorio_Robotica/Proyecto_Final/SenalLED_ert_rtw/rt_nonfinite.h:
 
 C:/Users/Leonardo/Desktop/4_GIERM/Laboratorio_Robotica/Proyecto_Final/SenalLED_ert_rtw/rtGetInf.h:
+
+C:/PROGRA~1/MATLAB/R2020b/toolbox/coder/xcp/src/target/slave/include/xcp.h:
+
+C:/PROGRA~1/MATLAB/R2020b/toolbox/coder/xcp/src/target/slave/common/xcp_common.h:
+
+C:/PROGRA~1/MATLAB/R2020b/toolbox/coder/xcp/src/target/slave/platform/include/xcp_platform.h:
+
+C:/PROGRA~3/MATLAB/SUPPOR~1/R2020b/toolbox/target/SUPPOR~1/ARDUIN~1/include/xcp_platform_custom.h:
